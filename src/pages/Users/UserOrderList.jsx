@@ -29,13 +29,37 @@ const UserOrderList = () => {
     }, []);
 
     const getStatusBadge = (order) => {
-        if (order.isDelivered) return <span className="bg-green-100 text-green-800 px-3 py-1 text-xs font-medium rounded-full">Delivered</span>;
-        if (order.isPaid || order.paymentMethod === 'COD') return <span className="bg-yellow-100 text-yellow-800 px-3 py-1 text-xs font-medium rounded-full">Processing</span>;
-        return <span className="bg-red-100 text-red-800 px-3 py-1 text-xs font-medium rounded-full">Pending Payment</span>;
+        if (order.isDelivered)
+            return (
+                <span className="bg-green-100 text-green-800 px-3 py-1 text-xs font-medium rounded-full">
+                    Delivered
+                </span>
+            );
+
+        if (order.isPaid)
+            return (
+                <span className="bg-blue-100 text-blue-800 px-3 py-1 text-xs font-medium rounded-full">
+                    Paid
+                </span>
+            );
+
+        if (order.paymentMethod === 'COD')
+            return (
+                <span className="bg-yellow-100 text-yellow-800 px-3 py-1 text-xs font-medium rounded-full">
+                    Processing
+                </span>
+            );
+
+        return (
+            <span className="bg-red-100 text-red-800 px-3 py-1 text-xs font-medium rounded-full">
+                Pending Payment
+            </span>
+        );
     };
 
+
     if (loading) return <div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>;
-    
+
     return (
         <div className="min-h-screen bg-gray-50 section-padding">
             <div className="container-custom">
@@ -53,7 +77,7 @@ const UserOrderList = () => {
                     ) : (
                         <div className="space-y-6">
                             {orders.map((order, index) => (
-                                <motion.div 
+                                <motion.div
                                     key={order._id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
