@@ -1,126 +1,4 @@
-// // frontend/src/pages/User/UserOrderDetails.jsx
-// import React, { useState, useEffect } from 'react';
-// import { useParams, Link } from 'react-router-dom';
-// import { motion } from 'framer-motion';
-// import axios from 'axios';
-// import { toast } from 'react-toastify';
-// import { FiArrowLeft, FiShoppingBag, FiMapPin, FiCreditCard, FiTruck } from 'react-icons/fi';
-// import LoadingSpinner from '../../components/LoadingSpinner';
 
-// const UserOrderDetails = () => {
-//   const { id } = useParams();
-//   const [order, setOrder] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchOrder = async () => {
-//       try {
-//         setLoading(true);
-//         const { data } = await axios.get(`/api/orders/${id}`);
-//         setOrder(data);
-//         setLoading(false);
-//       } catch (error) {
-//         const message = error.response?.data?.message || 'Failed to load order details.';
-//         toast.error(message);
-//         setLoading(false);
-//       }
-//     };
-//     fetchOrder();
-//   }, [id]);
-
-//   if (loading) return <div className="min-h-screen flex items-center justify-center"><LoadingSpinner /></div>;
-//   if (!order) return <div className="min-h-screen flex items-center justify-center">Order not found.</div>;
-
-//   return (
-//     <div className="min-h-screen bg-gray-50 section-padding">
-//       <div className="container-custom">
-//         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-//           {/* Header */}
-//           <div className="flex items-center justify-between mb-8">
-//             <Link to="/profile/orders" className="flex items-center text-primary-600 hover:text-primary-700">
-//               <FiArrowLeft className="mr-2" /> Back to Orders
-//             </Link>
-//             <h1 className="text-3xl font-bold text-gray-900 flex items-center space-x-2">
-//               <FiShoppingBag className="w-7 h-7 text-primary-600" />
-//               <span>Order Details</span>
-//             </h1>
-//           </div>
-
-//           {/* Order Summary */}
-//           <div className="grid md:grid-cols-3 gap-8">
-//             <div className="md:col-span-2 bg-white rounded-xl shadow-lg p-6 space-y-6">
-//               <h2 className="text-xl font-semibold text-gray-900 border-b pb-3">Order Summary</h2>
-
-//               <p><span className="font-medium">Order ID:</span> {order._id}</p>
-//               <p><span className="font-medium">Placed on:</span> {new Date(order.createdAt).toLocaleString()}</p>
-
-//               {/* Ordered Items */}
-//               <div>
-//                 <h3 className="text-lg font-semibold mb-4 border-b pb-2">Items</h3>
-//                 <div className="space-y-4">
-//                   {order.orderItems.map(item => (
-//                     <div key={item.product} className="flex items-center justify-between border-b pb-3">
-//                       <div className="flex items-center space-x-3">
-//                         <img src={item.image} alt={item.name} className="w-14 h-14 rounded-lg object-cover" />
-//                         <div>
-//                           <p className="font-medium text-gray-800">{item.name}</p>
-//                           <p className="text-sm text-gray-500">Qty: {item.qty}</p>
-//                         </div>
-//                       </div>
-//                       <p className="text-gray-800 font-medium">₹{item.price.toFixed(2)}</p>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-
-//               {/* Price Details */}
-//               <div className="border-t pt-4 text-gray-800 space-y-1">
-//                 <p><span className="font-medium">Items Total:</span> ₹{order.itemsPrice.toFixed(2)}</p>
-//                 <p><span className="font-medium">Shipping:</span> ₹{order.shippingPrice.toFixed(2)}</p>
-//                 <p><span className="font-medium">Tax:</span> ₹{order.taxPrice.toFixed(2)}</p>
-//                 <p className="font-semibold text-lg border-t pt-2">Total: ₹{order.totalPrice.toFixed(2)}</p>
-//               </div>
-//             </div>
-
-//             {/* Delivery & Payment Info */}
-//             <div className="space-y-6">
-//               <div className="bg-white rounded-xl shadow-lg p-6">
-//                 <h3 className="text-xl font-semibold flex items-center mb-3">
-//                   <FiMapPin className="mr-2 text-primary-600" /> Shipping Address
-//                 </h3>
-//                 <p className="text-gray-700">{order.shippingAddress.fullName}</p>
-//                 <p className="text-gray-700">{order.shippingAddress.address}</p>
-//                 <p className="text-gray-700">{order.shippingAddress.city} - {order.shippingAddress.postalCode}</p>
-//                 <p className="text-gray-700">{order.shippingAddress.country}</p>
-//               </div>
-
-//               <div className="bg-white rounded-xl shadow-lg p-6">
-//                 <h3 className="text-xl font-semibold flex items-center mb-3">
-//                   <FiCreditCard className="mr-2 text-primary-600" /> Payment Info
-//                 </h3>
-//                 <p><span className="font-medium">Method:</span> {order.paymentMethod}</p>
-//                 <p><span className="font-medium">Paid:</span> {order.isPaid ? 'Yes' : 'No'}</p>
-//               </div>
-
-//               <div className="bg-white rounded-xl shadow-lg p-6">
-//                 <h3 className="text-xl font-semibold flex items-center mb-3">
-//                   <FiTruck className="mr-2 text-primary-600" /> Delivery Status
-//                 </h3>
-//                 <p>{order.isDelivered ? (
-//                   <span className="text-green-600 font-medium">Delivered on {new Date(order.deliveredAt).toLocaleDateString()}</span>
-//                 ) : (
-//                   <span className="text-yellow-600 font-medium">Not Delivered</span>
-//                 )}</p>
-//               </div>
-//             </div>
-//           </div>
-//         </motion.div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default UserOrderDetails;
 
 
 
@@ -219,12 +97,19 @@ const UserOrderDetails = () => {
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 border-t pt-3 text-right">
+                {/* <div className="mt-4 border-t pt-3 text-right">
                   <p className="text-sm">Items Total: ₹{order.itemsPrice?.toFixed(2) ?? '0.00'}</p>
                   <p className="text-sm">Shipping: ₹{order.shippingPrice?.toFixed(2) ?? '0.00'}</p>
                   <p className="text-sm">Tax: ₹{order.taxPrice?.toFixed(2) ?? '0.00'}</p>
                   <p className="font-semibold text-lg">Total: ₹{order.totalPrice?.toFixed(2) ?? '0.00'}</p>
+                </div> */}
+                <div className="mt-4 border-t pt-3 text-right">
+                  <p className="text-sm">Items Total (Excl. Tax): ₹{order.itemsPrice?.toFixed(2) ?? '0.00'}</p>
+                  <p className="text-sm">GST (5%): ₹{order.taxPrice?.toFixed(2) ?? '0.00'}</p>
+                  <p className="text-sm">Shipping: ₹{order.shippingPrice?.toFixed(2) ?? '0.00'}</p>
+                  <p className="font-semibold text-lg">Total: ₹{order.totalPrice?.toFixed(2) ?? '0.00'}</p>
                 </div>
+
               </div>
 
               <div className="bg-white p-6 rounded-xl shadow">
