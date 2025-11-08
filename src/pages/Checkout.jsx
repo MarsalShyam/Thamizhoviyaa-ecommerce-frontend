@@ -218,56 +218,56 @@
 
 //         <div className="grid lg:grid-cols-2 gap-8">
 //           {/* LEFT: Shipping & Payment */}
-//           <motion.form initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-6">
-//             <h2 className="text-xl font-semibold text-gray-900 mb-6">Shipping Information</h2>
+          // <motion.form initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-6">
+          //   <h2 className="text-xl font-semibold text-gray-900 mb-6">Shipping Information</h2>
 
-//             {user?.addresses?.length > 0 && (
-//               <div className="mb-6">
-//                 <label className="block text-sm font-medium text-gray-700 mb-2">Choose Saved Address</label>
-//                 <select onChange={handleAddressChange} value={selectedAddress?._id || 'new'} className="w-full border border-gray-300 rounded-lg px-3 py-2">
-//                   {user.addresses.map(addr => (
-//                     <option key={addr._id} value={addr._id}>
-//                       {addr.name} - {addr.address}, {addr.pincode} {addr.isDefault && '(Default)'}
-//                     </option>
-//                   ))}
-//                   <option value="new">Create a New Address</option>
-//                 </select>
-//               </div>
-//             )}
+          //   {user?.addresses?.length > 0 && (
+          //     <div className="mb-6">
+          //       <label className="block text-sm font-medium text-gray-700 mb-2">Choose Saved Address</label>
+          //       <select onChange={handleAddressChange} value={selectedAddress?._id || 'new'} className="w-full border border-gray-300 rounded-lg px-3 py-2">
+          //         {user.addresses.map(addr => (
+          //           <option key={addr._id} value={addr._id}>
+          //             {addr.name} - {addr.address}, {addr.pincode} {addr.isDefault && '(Default)'}
+          //           </option>
+          //         ))}
+          //         <option value="new">Create a New Address</option>
+          //       </select>
+          //     </div>
+          //   )}
 
-//             {(!user?.addresses?.length || !selectedAddress) && (
-//               <div className="space-y-4 border p-4 rounded-lg bg-gray-50">
-//                 <h3 className="text-lg font-semibold text-gray-800">New Address Details</h3>
-//                 <div className="grid md:grid-cols-2 gap-4">
-//                   <input type="text" placeholder="Full Name" value={newAddress.name} onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
-//                   <input type="tel" placeholder="Phone" value={newAddress.phone} onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
-//                 </div>
-//                 <input type="email" placeholder="Email" value={newAddress.email} onChange={(e) => setNewAddress({ ...newAddress, email: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
-//                 <textarea placeholder="Address" rows="2" value={newAddress.address} onChange={(e) => setNewAddress({ ...newAddress, address: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-vertical" />
-//                 <div className="grid md:grid-cols-2 gap-4">
-//                   <input type="text" placeholder="City" value={newAddress.city} onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
-//                   <input type="text" placeholder="Pincode" value={newAddress.pincode} onChange={(e) => setNewAddress({ ...newAddress, pincode: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
-//                 </div>
-//               </div>
-//             )}
+          //   {(!user?.addresses?.length || !selectedAddress) && (
+          //     <div className="space-y-4 border p-4 rounded-lg bg-gray-50">
+          //       <h3 className="text-lg font-semibold text-gray-800">New Address Details</h3>
+          //       <div className="grid md:grid-cols-2 gap-4">
+          //         <input type="text" placeholder="Full Name" value={newAddress.name} onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+          //         <input type="tel" placeholder="Phone" value={newAddress.phone} onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+          //       </div>
+          //       <input type="email" placeholder="Email" value={newAddress.email} onChange={(e) => setNewAddress({ ...newAddress, email: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+          //       <textarea placeholder="Address" rows="2" value={newAddress.address} onChange={(e) => setNewAddress({ ...newAddress, address: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-vertical" />
+          //       <div className="grid md:grid-cols-2 gap-4">
+          //         <input type="text" placeholder="City" value={newAddress.city} onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+          //         <input type="text" placeholder="Pincode" value={newAddress.pincode} onChange={(e) => setNewAddress({ ...newAddress, pincode: e.target.value })} required className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+          //       </div>
+          //     </div>
+          //   )}
 
-//             <div className="mt-6">
-//               <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
-//               <div className="space-y-3">
-//                 <label className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer ${paymentMethod === 'razorpay' ? 'border-primary-600 bg-primary-50' : 'border-gray-300'}`}>
-//                   <input type="radio" name="paymentMethod" value="razorpay" checked={paymentMethod === 'razorpay'} onChange={() => setPaymentMethod('razorpay')} className="text-primary-600" />
-//                   <FiCreditCard className="w-5 h-5 text-primary-600" />
-//                   <span>Pay Online (Razorpay)</span>
-//                 </label>
+          //   <div className="mt-6">
+          //     <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
+          //     <div className="space-y-3">
+          //       <label className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer ${paymentMethod === 'razorpay' ? 'border-primary-600 bg-primary-50' : 'border-gray-300'}`}>
+          //         <input type="radio" name="paymentMethod" value="razorpay" checked={paymentMethod === 'razorpay'} onChange={() => setPaymentMethod('razorpay')} className="text-primary-600" />
+          //         <FiCreditCard className="w-5 h-5 text-primary-600" />
+          //         <span>Pay Online (Razorpay)</span>
+          //       </label>
 
-//                 <label className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer ${paymentMethod === 'cod' ? 'border-primary-600 bg-primary-50' : 'border-gray-300'}`}>
-//                   <input type="radio" name="paymentMethod" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="text-primary-600" />
-//                   <FiCheckCircle className="w-5 h-5 text-green-600" />
-//                   <span>Cash on Delivery (COD)</span>
-//                 </label>
-//               </div>
-//             </div>
-//           </motion.form>
+          //       <label className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer ${paymentMethod === 'cod' ? 'border-primary-600 bg-primary-50' : 'border-gray-300'}`}>
+          //         <input type="radio" name="paymentMethod" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} className="text-primary-600" />
+          //         <FiCheckCircle className="w-5 h-5 text-green-600" />
+          //         <span>Cash on Delivery (COD)</span>
+          //       </label>
+          //     </div>
+          //   </div>
+          // </motion.form>
 
 //           {/* RIGHT: Order Summary */}
 //           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white rounded-xl shadow-sm p-6 sticky top-4">
