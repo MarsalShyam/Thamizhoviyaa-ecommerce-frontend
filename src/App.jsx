@@ -194,6 +194,8 @@ import AdminProductCreateEdit from './pages/Admin/ProductCreateEdit'
 import AdminOrderList from './pages/Admin/AdminOrderList'
 import AdminOrderDetails from './pages/Admin/AdminOrderDetails'
 import AdminUserList from './pages/Admin/AdminUserList'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 // === Layout ===
 const MainLayout = () => (
@@ -238,6 +240,8 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/forgot-password" element={<ForgotPassword/>}/>
+              <Route path="/reset-password/:token" element={<ResetPassword/>}/>
 
               {/* --- PROTECTED USER ROUTES --- */}
               <Route element={<ProtectedRoute />}>

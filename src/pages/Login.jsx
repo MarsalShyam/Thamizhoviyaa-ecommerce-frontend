@@ -1,4 +1,4 @@
-// frontend/src/pages/Login.jsx
+// frontend/src/pages/Login.jsx 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiLock, FiUser, FiArrowRight } from 'react-icons/fi';
@@ -35,14 +35,13 @@ const LoginPage = () => {
         ? await login(form.phoneOrEmail, form.password)
         : await register(form.name, form.phone, form.password, form.email);
 
-      // ✅ data = { user: {...} }
       if (data.user?.isAdmin) {
         navigate('/admin');
       } else {
         navigate('/');
       }
     } catch (err) {
-      setError(typeof err === 'string' ? err : 'Authentication failed.');
+      setError(typeof err === 'string' ? err : err?.toString() || 'Authentication failed.');
     } finally {
       setLoading(false);
     }
@@ -58,6 +57,10 @@ const LoginPage = () => {
       email: '',
       password: '',
     });
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
   };
 
   return (
@@ -162,6 +165,17 @@ const LoginPage = () => {
               className="input-field"
               placeholder="••••••••"
             />
+            {isLogin && (
+              <div className="flex justify-end mt-1">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-xs text-accent-500 hover:text-accent-400"
+                >
+                  Forgot password?
+                </button>
+              </div>
+            )}
           </div>
 
           <button
