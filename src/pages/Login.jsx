@@ -31,15 +31,19 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const data = isLogin
-        ? await login(form.phoneOrEmail, form.password)
-        : await register(form.name, form.phone, form.password, form.email);
+      if (isLogin) {
+        const data = await login(form.phoneOrEmail, form.password);
 
-      // ✅ data = { user: {...} }
-      if (data.user?.isAdmin) {
-        navigate('/admin');
+        if (data.user?.isAdmin) {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       } else {
-        navigate('/');
+        // Registration – no auto-login; just send verification email
+        await register(form.name, form.phone || undefined, form.password, form.email);
+        // switch to login mode
+        setIsLogin(true);
       }
     } catch (err) {
       setError(typeof err === 'string' ? err : 'Authentication failed.');
@@ -58,6 +62,10 @@ const LoginPage = () => {
       email: '',
       password: '',
     });
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
   };
 
   return (
@@ -103,14 +111,13 @@ const LoginPage = () => {
 
               <div>
                 <label className="input-label flex items-center mb-1">
-                  <FiPhone className="w-4 h-4 mr-2 text-primary-600" /> Phone Number
+                  <FiPhone className="w-4 h-4 mr-2 text-primary-600" /> Phone Number (Optional)
                 </label>
                 <input
                   type="tel"
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  required
                   className="input-field"
                   placeholder="9876543210"
                 />
@@ -118,13 +125,14 @@ const LoginPage = () => {
 
               <div>
                 <label className="input-label flex items-center mb-1">
-                  <FiMail className="w-4 h-4 mr-2 text-primary-600" /> Email (Optional)
+                  <FiMail className="w-4 h-4 mr-2 text-primary-600" /> Email
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
+                  required
                   className="input-field"
                   placeholder="Enter your email"
                 />
@@ -135,7 +143,7 @@ const LoginPage = () => {
           {isLogin && (
             <div>
               <label className="input-label flex items-center mb-1">
-                <FiPhone className="w-4 h-4 mr-2 text-primary-600" /> Phone or Email
+                <FiMail className="w-4 h-4 mr-2 text-primary-600" /> Email or Phone
               </label>
               <input
                 type="text"
@@ -144,7 +152,7 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
                 className="input-field"
-                placeholder="Phone number or Email"
+                placeholder="Email or phone number"
               />
             </div>
           )}
@@ -162,6 +170,17 @@ const LoginPage = () => {
               className="input-field"
               placeholder="••••••••"
             />
+            {isLogin && (
+              <div className="flex justify-end mt-1">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-xs text-accent-500 hover:text-accent-400"
+                >
+                  Forgot password?
+                </button>
+              </div>
+            )}
           </div>
 
           <button
