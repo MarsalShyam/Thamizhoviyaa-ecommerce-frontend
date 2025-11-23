@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
       toast.success(`Welcome back, ${formatted.user.name.split(' ')[0]}!`);
       return formatted; // { user: {...} }
     } catch (error) {
-      const msg = error.response?.data?.message || 'Login failed.';
+      const msg = error.response?.data?.message || 'Invalid email/phone or password.';
       toast.error(msg);
       throw msg;
     }
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
       );
       return data;
     } catch (error) {
-      const msg = error.response?.data?.message || 'Registration failed.';
+      const msg = error.response?.data?.message || 'User already exists with this email or phone';
       toast.error(msg);
       throw msg;
     }
