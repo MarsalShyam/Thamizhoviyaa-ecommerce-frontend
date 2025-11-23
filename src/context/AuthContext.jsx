@@ -53,18 +53,17 @@ export const AuthProvider = ({ children }) => {
     fetchUser(token);
   }, [token, fetchUser]);
 
-  // ✅ ✅ FIXED LOGIN
+  // ✅ LOGIN (no change in behaviour)
   const login = async (phoneOrEmail, password) => {
     try {
       const { data } = await axios.post('/api/auth/login', { phoneOrEmail, password });
 
-      // ✅ Backend returns user directly: we wrap it as { user: data }
       const formatted = { user: data };
 
       saveAuthData(formatted.user, data.token);
 
       toast.success(`Welcome back, ${formatted.user.name.split(' ')[0]}!`);
-      return formatted; // ✅ return { user: {...} }
+      return formatted; // { user: {...} }
     } catch (error) {
       const msg = error.response?.data?.message || 'Login failed.';
       toast.error(msg);
@@ -72,14 +71,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ ✅ FIXED REGISTER
-  const register = async (name, phone, password, email) => {
+  // ✅ REGISTER with Firebase phone OTP (extra param)
+  const register = async (name, phone, password, email, firebaseIdToken) => {
     try {
       const { data } = await axios.post('/api/auth/register', {
         name,
         phone,
         password,
         email,
+        firebaseIdToken,
       });
 
       const formatted = { user: data };
@@ -90,6 +90,24 @@ export const AuthProvider = ({ children }) => {
       return formatted;
     } catch (error) {
       const msg = error.response?.data?.message || 'Registration failed.';
+      toast.error(msg);
+      throw msg;
+    }
+  };
+
+  // ✅ RESET PASSWORD VIA PHONE + OTP
+  const resetPasswordWithPhone = async (phone, newPassword, firebaseIdToken) => {
+    try {
+      const { data } = await axios.post('/api/auth/reset-password-phone', {
+        phone,
+        password: newPassword,
+        firebaseIdToken,
+      });
+
+      toast.success(data.message || 'Password reset successful');
+      return data;
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Password reset failed.';
       toast.error(msg);
       throw msg;
     }
@@ -108,6 +126,7 @@ export const AuthProvider = ({ children }) => {
     isAdmin: user?.isAdmin || false,
     login,
     register,
+    resetPasswordWithPhone,
     logout,
     fetchUser,
   };

@@ -169,6 +169,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 // === Pages ===
+import ForgotPasswordPhone from './pages/ForgotPasswordPhone';
 import Home from './pages/Home'
 import About from './pages/About'
 import Products from './pages/Products'
@@ -238,6 +239,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPhone />} />
 
               {/* --- PROTECTED USER ROUTES --- */}
               <Route element={<ProtectedRoute />}>

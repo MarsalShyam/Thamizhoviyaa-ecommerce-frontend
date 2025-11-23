@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiLock, FiUser, FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { auth } from '../firebase/firebaseConfig';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,8 +23,70 @@ const LoginPage = () => {
     password: '',
   });
 
+  // OTP related state (signup only)
+  const [otp, setOtp] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState(null);
+  const [firebaseIdToken, setFirebaseIdToken] = useState(null);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // Setup invisible reCAPTCHA
+  const setupRecaptcha = () => {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'invisible',
+        callback: () => {
+          // reCAPTCHA solved
+        },
+      });
+    }
+    return window.recaptchaVerifier;
+  };
+
+  const handleSendOtp = async () => {
+    try {
+      setError(null);
+
+      if (!form.phone || form.phone.trim().length < 10) {
+        setError('Please enter a valid phone number.');
+        return;
+      }
+
+      const phoneNumber = '+91' + form.phone.trim(); // 🇮🇳 adjust if needed
+      const appVerifier = setupRecaptcha();
+
+      const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+      setConfirmationResult(result);
+      setOtpSent(true);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to send OTP. Please try again.');
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      setError(null);
+      if (!otp || !confirmationResult) {
+        setError('Please enter the OTP sent to your phone.');
+        return;
+      }
+
+      const result = await confirmationResult.confirm(otp);
+      const token = await result.user.getIdToken();
+
+      setIsPhoneVerified(true);
+      setFirebaseIdToken(token);
+    } catch (err) {
+      console.error(err);
+      setError('Invalid OTP. Please try again.');
+      setIsPhoneVerified(false);
+      setFirebaseIdToken(null);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -31,11 +95,28 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const data = isLogin
-        ? await login(form.phoneOrEmail, form.password)
-        : await register(form.name, form.phone, form.password, form.email);
+      let data;
 
-      // ✅ data = { user: {...} }
+      if (isLogin) {
+        // Normal login (phone/email + password)
+        data = await login(form.phoneOrEmail, form.password);
+      } else {
+        // Signup: require verified phone
+        if (!isPhoneVerified || !firebaseIdToken) {
+          setError('Please verify your phone number via OTP before signing up.');
+          setLoading(false);
+          return;
+        }
+
+        data = await register(
+          form.name,
+          form.phone,
+          form.password,
+          form.email,
+          firebaseIdToken
+        );
+      }
+
       if (data.user?.isAdmin) {
         navigate('/admin');
       } else {
@@ -58,10 +139,22 @@ const LoginPage = () => {
       email: '',
       password: '',
     });
+    setOtp('');
+    setOtpSent(false);
+    setIsPhoneVerified(false);
+    setFirebaseIdToken(null);
+    setConfirmationResult(null);
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
   };
 
   return (
     <div className="min-h-[80vh] bg-gray-50 section-padding flex items-center justify-center">
+      {/* for invisible reCAPTCHA */}
+      <div id="recaptcha-container"></div>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -114,7 +207,44 @@ const LoginPage = () => {
                   className="input-field"
                   placeholder="9876543210"
                 />
+                <div className="flex items-center gap-2 mt-2">
+                  <button
+                    type="button"
+                    onClick={handleSendOtp}
+                    className="text-xs px-3 py-1 rounded-full border border-accent-500 text-accent-500 hover:bg-accent-50"
+                  >
+                    {otpSent ? 'Resend OTP' : 'Send OTP'}
+                  </button>
+                  {isPhoneVerified && (
+                    <span className="text-xs text-green-600 font-medium">
+                      Phone verified ✅
+                    </span>
+                  )}
+                </div>
               </div>
+
+              {otpSent && !isPhoneVerified && (
+                <div>
+                  <label className="input-label flex items-center mb-1">
+                    <FiLock className="w-4 h-4 mr-2 text-primary-600" /> Enter OTP
+                  </label>
+                  <input
+                    type="text"
+                    name="otp"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    className="input-field"
+                    placeholder="6-digit OTP"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleVerifyOtp}
+                    className="mt-2 text-xs px-3 py-1 rounded-full border border-primary-600 text-primary-600 hover:bg-primary-50"
+                  >
+                    Verify OTP
+                  </button>
+                </div>
+              )}
 
               <div>
                 <label className="input-label flex items-center mb-1">
@@ -162,6 +292,17 @@ const LoginPage = () => {
               className="input-field"
               placeholder="••••••••"
             />
+            {isLogin && (
+              <div className="flex justify-end mt-1">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-xs text-accent-500 hover:text-accent-400"
+                >
+                  Forgot password?
+                </button>
+              </div>
+            )}
           </div>
 
           <button
