@@ -40,7 +40,7 @@ const Products = () => {
   // Filter and Sort Logic
   const filteredProducts = useMemo(() => {
     const cloned = [...products]
-    
+
     let result = cloned.filter(
       (product) =>
         selectedCategory === 'All' || product.category === selectedCategory
@@ -82,8 +82,8 @@ const Products = () => {
       {/* Filters */}
       <section className="bg-white border-b">
         <div className="container-custom section-padding py-8">
-          <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[1fr_auto] lg:items-center">
+            {/* <div className="flex flex-wrap gap-2">
               {CATEGORIES.map((category) => (
                 <button
                   key={category}
@@ -97,16 +97,34 @@ const Products = () => {
                   {category}
                 </button>
               ))}
+            </div> */}
+            <div className="w-full overflow-x-auto no-scrollbar ">
+              <div className="flex gap-2 whitespace-nowrap">
+                {CATEGORIES.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full font-medium transition-colors ${selectedCategory === category
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="flex items-center space-x-4">
+
+
+            <div className="flex items-center justify-center space-x-4 ">
               <span className="text-gray-600">Sort by:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
-                <option value="name">Name</option>
+                <option value="name">Price Filter</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
@@ -118,23 +136,23 @@ const Products = () => {
       {/* Products Grid */}
       <section className="section-padding bg-gray-100">
         <div className="container-custom">
-            {loading ? (
-                <ProductGridSkeleton count={8} /> // Show loading skeleton
-            ) : error ? (
-                <p className="text-center text-red-500 text-xl">{error}</p>
-            ) : (
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={`${selectedCategory}-${sortBy}`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        <ProductGrid products={filteredProducts} title="" description="" />
-                    </motion.div>
-                </AnimatePresence>
-            )}
+          {loading ? (
+            <ProductGridSkeleton count={8} /> // Show loading skeleton
+          ) : error ? (
+            <p className="text-center text-red-500 text-xl">{error}</p>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${selectedCategory}-${sortBy}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+              >
+                <ProductGrid products={filteredProducts} title="" description="" />
+              </motion.div>
+            </AnimatePresence>
+          )}
         </div>
       </section>
 
@@ -154,13 +172,14 @@ const Products = () => {
               to help you find the perfect natural remedy.
             </p>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/919342072821?text=Hi%2C%20I%20am%20interested%20in%20your%20herbal%20products.%20Please%20guide%20me."
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-flex items-center"
             >
               WhatsApp Us
             </a>
+
           </motion.div>
         </div>
       </section>

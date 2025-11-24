@@ -7,6 +7,7 @@ import { products } from '../data/products'
 import { FiTruck, FiShield, FiAward, FiHeart } from 'react-icons/fi'
 import axios from 'axios'
 import { ProductGridSkeleton } from '../components/SkeletonLoader'
+import Testimonials from '../components/Testimonials'
 
 
 const Home = () => {
@@ -204,8 +205,10 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            <Testimonials/>
         </div>
     )
 }
 
 export default Home
+

@@ -204,7 +204,7 @@ const About = () => {
                                         alt="Pure & Natural"
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-green-900/60 flex items-center justify-center p-6">
+                                    <div className="absolute inset-0 bg-green-900/50 flex items-center justify-center p-6">
                                         <div className="text-center text-white">
                                             <FiHeart className="w-8 h-8 text-accent-400 mx-auto mb-3" />
                                             <h3 className="font-bold text-lg mb-1">Natural</h3>
@@ -222,7 +222,7 @@ const About = () => {
                                         alt="Community Trust"
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-blue-900/60 flex items-center justify-center p-6">
+                                    <div className="absolute inset-0 bg-blue-900/50 flex items-center justify-center p-6">
                                         <div className="text-center text-white">
                                             <FiUsers className="w-8 h-8 text-accent-400 mx-auto mb-3" />
                                             <h3 className="font-bold text-lg mb-1">Trusted</h3>
@@ -238,7 +238,7 @@ const About = () => {
                                         alt="Premium Quality"
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-purple-900/60 flex items-center justify-center p-6">
+                                    <div className="absolute inset-0 bg-purple-900/50 flex items-center justify-center p-6">
                                         <div className="text-center text-white">
                                             <FiTarget className="w-8 h-8 text-accent-400 mx-auto mb-3" />
                                             <h3 className="font-bold text-lg mb-1">Quality</h3>
@@ -262,7 +262,7 @@ const About = () => {
                         className="text-center mb-16"
                     >
                         <div className="flex items-center justify-center mb-4">
-                            <div className="relative">
+                            <div className="relative hidden md:visible">
                                 <div className="absolute -inset-1 bg-red-500 rounded-full blur opacity-25"></div>
                                 <FiYoutube className="w-10 h-10 text-red-600 mr-3 relative" />
                             </div>
