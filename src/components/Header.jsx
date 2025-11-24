@@ -84,32 +84,32 @@ const Header = () => {
                             <FiUser className="w-5 h-5" />
                         </button> */}
                         <div className="relative group">
-                            <Link 
-                                to={profileLink} 
+                            <Link
+                                to={profileLink}
                                 className="p-2 text-gray-600 hover:text-primary-600 transition-colors"
                             >
                                 <FiUser className="w-5 h-5" />
                             </Link>
-                            
+
                             {isAuthenticated && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                                     <span className="block px-4 py-2 text-sm text-gray-500 truncate border-b mb-1">
                                         Hi, {user?.name || 'User'}
                                     </span>
-                                    <Link 
-                                        to="/profile" 
+                                    <Link
+                                        to="/profile"
                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     >
                                         My Profile
                                     </Link>
-                                    <Link 
-                                        to="/orders" 
+                                    <Link
+                                        to="/orders"
                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     >
                                         My Orders
                                     </Link>
-                                    <button 
-                                        onClick={logout} 
+                                    <button
+                                        onClick={logout}
                                         className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                                     >
                                         Logout
@@ -130,44 +130,66 @@ const Header = () => {
                 </div>
 
                 {/* Mobile Navigation */}
+                {/* Mobile Navigation (Professional Overlay) */}
+                {/* Mobile Navigation (Dropdown Below Header - NO PUSHING) */}
                 <AnimatePresence>
                     {isMenuOpen && (
                         <motion.div
-                            className="md:hidden bg-white border-t"
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
+                            className="md:hidden absolute left-0 right-0 top-full bg-white shadow-xl z-40"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.25 }}
                         >
-                            <div className="py-4 space-y-4">
+                            <div className="py-3 max-h-[75vh] overflow-y-auto">
                                 {navigation.map((item) => (
                                     <Link
                                         key={item.name}
                                         to={item.href}
-                                        className={`block px-4 py-2 font-medium ${isActive(item.href)
-                                            ? 'text-primary-600 bg-primary-50'
-                                            : 'text-gray-600'
+                                        className={`block px-5 py-3 font-medium border-b ${isActive(item.href)
+                                                ? 'text-primary-600 bg-primary-50'
+                                                : 'text-gray-700 hover:bg-gray-100'
                                             }`}
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         {item.name}
                                     </Link>
                                 ))}
-                                <div className="px-4 pt-4 border-t flex space-x-4">
-                                    <Link to="/wishlist" className="flex items-center space-x-2 text-gray-600" onClick={() => setIsMenuOpen(false)}>
+
+                                {/* User Actions */}
+                                <div className="mt-2 border-t">
+                                    <Link
+                                        to="/wishlist"
+                                        className="flex items-center px-5 py-3 space-x-3 text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
                                         <FiHeart className="w-5 h-5" />
                                         <span>Wishlist ({wishlist.length})</span>
                                     </Link>
-                                    <Link to="/cart" className="flex items-center space-x-2 text-gray-600" onClick={() => setIsMenuOpen(false)}>
+
+                                    <Link
+                                        to="/cart"
+                                        className="flex items-center px-5 py-3 space-x-3 text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
                                         <FiShoppingCart className="w-5 h-5" />
                                         <span>Cart ({cartCount})</span>
                                     </Link>
-                                    <Link to={profileLink} className="flex items-center space-x-2 text-gray-600" onClick={() => setIsMenuOpen(false)}>
+
+                                    <Link
+                                        to={profileLink}
+                                        className="flex items-center px-5 py-3 space-x-3 text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
                                         <FiUser className="w-5 h-5" />
                                         <span>{isAuthenticated ? 'My Profile' : 'Sign In'}</span>
                                     </Link>
+
                                     {isAuthenticated && (
-                                        <button onClick={() => { logout(); setIsMenuOpen(false); }} className="w-full flex items-center space-x-2 text-red-600">
+                                        <button
+                                            onClick={() => { logout(); setIsMenuOpen(false); }}
+                                            className="flex items-center w-full px-5 py-3 space-x-3 text-red-600 hover:bg-red-50"
+                                        >
                                             <FiX className="w-5 h-5" />
                                             <span>Logout</span>
                                         </button>
@@ -177,6 +199,8 @@ const Header = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+
             </nav>
         </motion.header>
     )

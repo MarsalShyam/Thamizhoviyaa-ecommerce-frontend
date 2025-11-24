@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from 'react-icons/fi'
+import emailjs from '@emailjs/browser';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,19 +20,38 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission - in future, this will connect to backend
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    })
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          from_phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      alert("Message sent successfully! We will contact you soon.");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      alert("Failed to send message. Please try again.");
+    }
+  };
+
 
   const contactInfo = [
     {
@@ -85,7 +106,7 @@ const Contact = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
-              
+
               <div className="space-y-6 mb-8">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -115,19 +136,24 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="bg-green-50 border border-green-200 rounded-xl p-6"
               >
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Quick Response via WhatsApp</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  Quick Response via WhatsApp
+                </h3>
+
                 <p className="text-gray-600 mb-4">
                   For instant queries and orders, message us directly on WhatsApp
                 </p>
-                <a 
-                  href="https://wa.me/919342072821" 
-                  target="_blank" 
+
+                <a
+                  href="https://wa.me/919342072821?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20your%20herbal%20products."
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 transition-colors"
                 >
                   <span>Chat on WhatsApp</span>
                 </a>
               </motion.div>
+
             </motion.div>
 
             {/* Contact Form */}
@@ -138,7 +164,7 @@ const Contact = () => {
               className="bg-gray-50 rounded-xl p-8"
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -156,7 +182,7 @@ const Contact = () => {
                       placeholder="Enter your full name"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address *
@@ -189,7 +215,7 @@ const Contact = () => {
                       placeholder="Enter your phone number"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       Subject *
@@ -265,7 +291,7 @@ const Contact = () => {
                   PAVADAI STREET, KALANGANI POST, NAMAKKAL-637014, TAMILNADU, INDIA
                 </p>
                 <div className="mt-6">
-                  <a 
+                  <a
                     href="https://maps.google.com/?q=Kalangani,Namakkal,TamilNadu"
                     target="_blank"
                     rel="noopener noreferrer"
