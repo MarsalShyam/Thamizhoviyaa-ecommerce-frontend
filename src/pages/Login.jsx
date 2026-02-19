@@ -368,7 +368,7 @@ const LoginPage = () => {
 
               <div>
                 <label className="input-label flex items-center mb-1">
-                  <FiPhone className="w-4 h-4 mr-2 text-primary-600" /> Phone No. (Optional)
+                  <FiPhone className="w-4 h-4 mr-2 text-primary-600" /> Phone (Optional)
                 </label>
                 <input
                   type="tel"
