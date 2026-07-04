@@ -65,8 +65,8 @@ const ProductCard = ({ product }) => {
           <button
             onClick={handleToggleWishlist}
             className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 ${isLiked
-                ? 'bg-red-500 text-white shadow-lg'
-                : 'bg-white/90 text-gray-600 hover:bg-white hover:text-red-500 shadow-md'
+              ? 'bg-red-500 text-white shadow-lg'
+              : 'bg-white/90 text-gray-600 hover:bg-white hover:text-red-500 shadow-md'
               }`}
           >
             <FiHeart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
