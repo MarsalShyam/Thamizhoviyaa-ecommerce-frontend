@@ -99,8 +99,8 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/login/*" element={<LoginPage />} />
+                <Route path="/signup/*" element={<SignUpPage />} />
                 <Route path="/login/sso-callback" element={<AuthenticateWithRedirectCallback />} />
                 <Route path="/sso-callback" element={<AuthenticateWithRedirectCallback />} />
 
