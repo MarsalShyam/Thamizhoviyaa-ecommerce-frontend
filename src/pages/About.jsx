@@ -152,7 +152,7 @@ const About = () => {
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.4 }}
                         >
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
                             <p className="text-lg text-gray-600 mb-6">
@@ -177,7 +177,7 @@ const About = () => {
                         <motion.div
                             initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.4 }}
                             className="grid grid-cols-2 gap-4"
                         >
                             <div className="space-y-4">
@@ -258,7 +258,7 @@ const About = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.3 }}
                         className="text-center mb-16"
                     >
                         <div className="flex items-center justify-center mb-4">
@@ -281,7 +281,7 @@ const About = () => {
                         <motion.button
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.3 }}
                             onClick={scrollPrev}
 
                             className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-300 group ${!showPrevArrow ? 'opacity-0 pointer-events-none' : 'opacity-100'
@@ -293,7 +293,7 @@ const About = () => {
                         <motion.button
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.3 }}
                             onClick={scrollNext}
                             className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all duration-300 group ${!showNextArrow ? 'opacity-0 pointer-events-none' : 'opacity-100'
                                 }`}
@@ -312,7 +312,7 @@ const About = () => {
                                     key={video.id}
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    transition={{ duration: 0.4, delay: index * 0.1 }}
                                     className="flex-shrink-0 w-[85vw] md:w-[45vw] lg:w-[30vw] snap-center"
                                 >
                                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 group border border-gray-200">
@@ -369,7 +369,7 @@ const About = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
+                        transition={{ duration: 0.3, delay: 0.2 }}
                         className="text-center mt-14"
                     >
                         <div className="relative rounded-2xl p-8 shadow-2xl border border-gray-200 overflow-hidden min-h-[300px] flex items-center justify-center">
@@ -417,7 +417,7 @@ const About = () => {
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.8 }}
+                                    transition={{ duration: 0.3, delay: 0.2 }}
                                     className="mt-8 flex flex-wrap justify-center gap-6 text-white/80"
                                 >
                                     <div className="flex items-center">
@@ -445,7 +445,7 @@ const About = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.4 }}
                         className="text-center mb-12"
                     >
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
@@ -460,7 +460,7 @@ const About = () => {
                                 key={value.title}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
+                                transition={{ duration: 0.4, delay: index * 0.1 }}
                                 className="text-center p-6 bg-primary-50 hover:bg-primary-100 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
                             >
                                 <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -481,7 +481,7 @@ const About = () => {
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.4 }}
                         >
                             <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
                             <p className="text-xl text-primary-100 mb-6">
@@ -499,7 +499,7 @@ const About = () => {
                         <motion.div
                             initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.4 }}
                             className="bg-white/10 backdrop-blur-sm rounded-2xl p-8"
                         >
                             <h3 className="text-2xl font-bold mb-4">Why Choose Us?</h3>

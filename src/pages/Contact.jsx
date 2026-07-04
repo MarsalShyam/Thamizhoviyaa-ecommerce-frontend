@@ -84,7 +84,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
@@ -103,7 +103,7 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.4 }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
 
@@ -133,7 +133,7 @@ const Contact = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
                 className="bg-green-50 border border-green-200 rounded-xl p-6"
               >
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -160,7 +160,7 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.4 }}
               className="bg-gray-50 rounded-xl p-8"
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
@@ -270,7 +270,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Location</h2>
@@ -280,25 +280,50 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="bg-white rounded-xl shadow-lg overflow-hidden"
           >
-            <div className="h-96 bg-gradient-to-br from-primary-50 to-accent-50 flex items-center justify-center">
-              <div className="text-center">
-                <FiMapPin className="w-16 h-16 text-primary-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Kalangani, Namakkal</h3>
-                <p className="text-gray-600 max-w-md mx-auto">
-                  PAVADAI STREET, KALANGANI POST, NAMAKKAL-637014, TAMILNADU, INDIA
-                </p>
-                <div className="mt-6">
-                  <a
-                    href="https://maps.google.com/?q=Kalangani,Namakkal,TamilNadu"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary inline-flex items-center"
-                  >
-                    Open in Google Maps
-                  </a>
+            <div className="relative h-96">
+              {/* Google Map */}
+              <iframe
+                title="Kalangani Location"
+                src="https://maps.google.com/maps?q=Kalangani%20Namakkal%20TamilNadu&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              {/* Overlay Card */}
+              <div className="absolute bottom-6 left-6 right-6 md:right-auto bg-white/95 backdrop-blur-md rounded-xl shadow-xl p-5 max-w-md">
+                <div className="flex items-start gap-3">
+                  <div className="bg-primary-100 p-3 rounded-full">
+                    <FiMapPin className="w-6 h-6 text-primary-600" />
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">
+                      Kalangani, Namakkal
+                    </h3>
+
+                    <p className="text-gray-600 mt-1">
+                      PAVADAI STREET, KALANGANI POST,
+                      <br />
+                      NAMAKKAL - 637014,
+                      <br />
+                      TAMIL NADU, INDIA
+                    </p>
+
+                    <a
+                      href="https://maps.google.com/?q=Kalangani,Namakkal,TamilNadu"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center mt-4 px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300"
+                    >
+                      <FiMapPin className="mr-2" />
+                      Open in Google Maps
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

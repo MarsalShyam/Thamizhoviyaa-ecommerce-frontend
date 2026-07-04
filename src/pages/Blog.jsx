@@ -34,7 +34,7 @@ const Blog = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Herbal Wisdom Blog</h1>
@@ -60,16 +60,16 @@ const Blog = () => {
                   key={post._id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
                 >
                   <div>
                     {/* Thumbnail */}
                     <div className="h-48 relative overflow-hidden">
-                      <img 
-                        src={post.thumbnail} 
-                        alt={post.title} 
+                      <img
+                        src={post.thumbnail}
+                        alt={post.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                         onError={(e) => { e.target.src = 'https://placehold.co/400x250?text=Thamizhoviyaa'; }}
                       />
@@ -82,7 +82,7 @@ const Blog = () => {
                       <h3 className="text-xl font-bold text-primary-900 mb-3 line-clamp-2">
                         {post.title}
                       </h3>
-                      
+
                       <p className="text-gray-650 mb-4 line-clamp-3 text-sm leading-relaxed">
                         {post.content.length > 150 ? `${post.content.substring(0, 150)}...` : post.content}
                       </p>
@@ -103,7 +103,7 @@ const Blog = () => {
                       </div>
                     </div>
 
-                    <Link 
+                    <Link
                       to={`/blog/${post._id}`}
                       className="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2 text-sm"
                     >
@@ -120,7 +120,7 @@ const Blog = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-16 bg-primary-600 rounded-2xl p-8 text-center text-white"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Stay Updated with Herbal Wisdom</h2>

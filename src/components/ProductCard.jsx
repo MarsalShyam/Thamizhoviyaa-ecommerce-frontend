@@ -76,7 +76,7 @@ const ProductCard = ({ product }) => {
         <div className="absolute top-3 left-3 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 
           {/* ✅ Replace Link with div to avoid <a> inside <a> */}
-          <div
+          {/* <div
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -85,7 +85,7 @@ const ProductCard = ({ product }) => {
             className="bg-white p-2 rounded-full shadow-md hover:bg-primary-50 transition-colors cursor-pointer"
           >
             <FiEye className="w-4 h-4 text-primary-600" />
-          </div>
+          </div> */}
 
           <button
             onClick={handleAddToCart}
