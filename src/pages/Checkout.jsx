@@ -690,10 +690,7 @@ const Checkout = () => {
     await axios.put('/api/users/profile', { addresses: newAddresses });
 
     // Re-fetch updated user (refreshes address list)
-    const token = localStorage.getItem('userToken');
-    if (token) {
-      await fetchUser(token);
-    }
+    await fetchUser();
 
     console.log("✅ New address saved to DB successfully");
   } catch (err) {

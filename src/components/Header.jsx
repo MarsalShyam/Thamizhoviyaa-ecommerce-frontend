@@ -10,7 +10,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const location = useLocation()
     const { cartCount, wishlist } = useCart()
-    const { isAuthenticated, logout, user } = useAuth()
+    const { isAuthenticated, logout, user, isAdmin } = useAuth()
 
     const navigation = [
         { name: 'Home', href: '/' },
@@ -103,11 +103,19 @@ const Header = () => {
                                         My Profile
                                     </Link>
                                     <Link
-                                        to="/orders"
+                                        to="/profile/orders"
                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                     >
                                         My Orders
                                     </Link>
+                                    {isAdmin && (
+                                        <Link
+                                            to="/admin"
+                                            className="block px-4 py-2 text-sm font-semibold text-primary-600 hover:bg-primary-50"
+                                        >
+                                            Admin Dashboard
+                                        </Link>
+                                    )}
                                     <button
                                         onClick={logout}
                                         className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-red-50"
@@ -147,8 +155,8 @@ const Header = () => {
                                         key={item.name}
                                         to={item.href}
                                         className={`block px-5 py-3 font-medium border-b ${isActive(item.href)
-                                                ? 'text-primary-600 bg-primary-50'
-                                                : 'text-gray-700 hover:bg-gray-100'
+                                            ? 'text-primary-600 bg-primary-50'
+                                            : 'text-gray-700 hover:bg-gray-100'
                                             }`}
                                         onClick={() => setIsMenuOpen(false)}
                                     >
@@ -184,6 +192,16 @@ const Header = () => {
                                         <FiUser className="w-5 h-5" />
                                         <span>{isAuthenticated ? 'My Profile' : 'Sign In'}</span>
                                     </Link>
+                                    {isAuthenticated && isAdmin && (
+                                        <Link
+                                            to="/admin"
+                                            className="flex items-center px-5 py-3 space-x-3 text-primary-600 hover:bg-primary-50 font-semibold border-b"
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            <FiUser className="w-5 h-5" />
+                                            <span>Admin Dashboard</span>
+                                        </Link>
+                                    )}
 
                                     {isAuthenticated && (
                                         <button

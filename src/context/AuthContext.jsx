@@ -1,5 +1,6 @@
 // frontend/src/context/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useAuth as useClerkAuth, useUser as useClerkUser } from '@clerk/clerk-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -8,152 +9,80 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  const { isLoaded: clerkLoaded, isSignedIn, getToken, signOut } = useClerkAuth();
+  const { user: clerkUser } = useClerkUser();
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('userToken'));
-  const [isLoading, setIsLoading] = useState(true);
+  const [isMongoLoading, setIsMongoLoading] = useState(true);
 
   axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || '';
 
-  // Save user + token
-  const saveAuthData = (userData, userToken) => {
-    localStorage.setItem('userToken', userToken);
-    setToken(userToken);
-    setUser(userData);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${userToken}`;
-  };
-
-  // Clear user + token
-  const removeAuthData = () => {
-    localStorage.removeItem('userToken');
-    setToken(null);
-    setUser(null);
-    delete axios.defaults.headers.common['Authorization'];
-  };
-
-  // Fetch user using saved token
-  const fetchUser = useCallback(
-    async (userToken) => {
-      if (!userToken) {
-        removeAuthData();
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${userToken}`;
-        const { data } = await axios.get('/api/users/profile');
-        setUser(data);
-      } catch (err) {
-        removeAuthData();
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
-
+  // 1. Axios Request Interceptor to dynamically inject Clerk Token
   useEffect(() => {
-    fetchUser(token);
-  }, [token, fetchUser]);
+    const interceptor = axios.interceptors.request.use(
+      async (config) => {
+        if (isSignedIn) {
+          try {
+            const token = await getToken();
+            if (token) {
+              config.headers['Authorization'] = `Bearer ${token}`;
+            }
+          } catch (err) {
+            console.error('Error fetching Clerk token for axios:', err);
+          }
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
 
-  // LOGIN
-  const login = async (phoneOrEmail, password) => {
-    try {
-      const { data } = await axios.post('/api/auth/login', { phoneOrEmail, password });
+    return () => {
+      axios.interceptors.request.eject(interceptor);
+    };
+  }, [isSignedIn, getToken]);
 
-      const formatted = { user: data };
-      saveAuthData(formatted.user, data.token);
-
-      toast.success(`Welcome back, ${formatted.user.name.split(' ')[0]}!`);
-      return formatted; // { user: {...} }
-    } catch (error) {
-      const msg = error.response?.data?.message || 'Invalid email/phone or password.';
-      toast.error(msg);
-      throw msg;
+  // 2. Fetch / Sync User Profile from MongoDB
+  const fetchUser = useCallback(async () => {
+    if (!isSignedIn) {
+      setUser(null);
+      setIsMongoLoading(false);
+      return;
     }
-  };
-
-  // REGISTER – now only sends email verification, no auto-login
-  const register = async (name, phone, password, email) => {
     try {
-      const { data } = await axios.post('/api/auth/register', {
-        name,
-        phone,
-        password,
-        email,
-      });
-
-      toast.success(
-        data.message || 'Registration successful. Please check your email to verify your account.'
-      );
-      return data;
-    } catch (error) {
-      const msg = error.response?.data?.message || 'User already exists with this email or phone';
-      toast.error(msg);
-      throw msg;
+      setIsMongoLoading(true);
+      const { data } = await axios.get('/api/users/profile');
+      setUser(data);
+    } catch (err) {
+      console.error('Failed to fetch MongoDB user profile:', err);
+      setUser(null);
+    } finally {
+      setIsMongoLoading(false);
     }
-  };
+  }, [isSignedIn]);
 
-  // VERIFY EMAIL
-  const verifyEmail = async (tokenParam) => {
+  // 3. Trigger profile fetch when Clerk state is initialized and signed in
+  useEffect(() => {
+    if (clerkLoaded) {
+      fetchUser();
+    }
+  }, [clerkLoaded, isSignedIn, fetchUser]);
+
+  const logout = async () => {
     try {
-      const { data } = await axios.post('/api/auth/verify-email', { token: tokenParam });
-      toast.success(data.message || 'Email verified successfully.');
-      return data;
+      await signOut();
+      setUser(null);
+      toast.info('Logged out successfully!');
     } catch (error) {
-      const msg = error.response?.data?.message || 'Email verification failed.';
-      toast.error(msg);
-      throw msg;
+      console.error('Logout error:', error);
+      toast.error('Logout failed.');
     }
-  };
-
-  // REQUEST PASSWORD RESET
-  const requestPasswordReset = async (email) => {
-    try {
-      const { data } = await axios.post('/api/auth/forgot-password', { email });
-      toast.info(
-        data.message ||
-          'If an account with that email exists, a password reset link has been sent.'
-      );
-      return data;
-    } catch (error) {
-      const msg = error.response?.data?.message || 'Failed to send reset link.';
-      toast.error(msg);
-      throw msg;
-    }
-  };
-
-  // RESET PASSWORD
-  const resetPassword = async (tokenParam, newPassword) => {
-    try {
-      const { data } = await axios.post(`/api/auth/reset-password/${tokenParam}`, {
-        password: newPassword,
-      });
-      toast.success(data.message || 'Password reset successful.');
-      return data;
-    } catch (error) {
-      const msg = error.response?.data?.message || 'Failed to reset password.';
-      toast.error(msg);
-      throw msg;
-    }
-  };
-
-  const logout = () => {
-    removeAuthData();
-    toast.info('Logged out successfully!');
   };
 
   const value = {
     user,
-    token,
-    isLoading,
-    isAuthenticated: !!user,
+    clerkUser,
+    isLoading: !clerkLoaded || isMongoLoading,
+    isAuthenticated: isSignedIn && !!user,
     isAdmin: user?.isAdmin || false,
-    login,
-    register,
-    verifyEmail,
-    requestPasswordReset,
-    resetPassword,
     logout,
     fetchUser,
   };

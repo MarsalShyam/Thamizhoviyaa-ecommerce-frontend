@@ -55,7 +55,7 @@ const AddressManagement = () => {
     const updateAddresses = async (addresses) => {
         const { data } = await axios.put('/api/users/profile', { addresses });
         // The fetchUser call re-fetches the user model which contains the addresses
-        await fetchUser(localStorage.getItem('userToken'));
+        await fetchUser();
         return data;
     }
 

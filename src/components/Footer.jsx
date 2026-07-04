@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
               </Link>
               <p className="text-primary-200 mb-6 max-w-md">
-                Traditional Tamil herbal products for modern wellness. 
+                Traditional Tamil herbal products for modern wellness.
                 100% natural, chemical-free solutions for your health and beauty needs.
               </p>
               <div className="flex space-x-4">

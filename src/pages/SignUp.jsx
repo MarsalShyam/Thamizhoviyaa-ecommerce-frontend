@@ -1,9 +1,9 @@
-// frontend/src/pages/Login.jsx
+// frontend/src/pages/SignUp.jsx
 import React from 'react';
-import { SignIn } from '@clerk/clerk-react';
+import { SignUp } from '@clerk/clerk-react';
 import { motion } from 'framer-motion';
 
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -12,10 +12,10 @@ const LoginPage = () => {
         transition={{ duration: 0.3 }}
         className="w-full max-w-md flex flex-col items-center"
       >
-        <SignIn routing="path" path="/login" signUpUrl="/signup" />
+        <SignUp routing="path" path="/signup" signInUrl="/login" />
       </motion.div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
