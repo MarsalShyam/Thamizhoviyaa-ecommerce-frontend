@@ -46,12 +46,12 @@ const ProductCard = ({ product }) => {
       transition={{ duration: 0.3 }}
     >
       <Link to={`/products/${product._id}`} className="block relative group">
-        <div className="h-80 bg-gradient-to-br from-primary-50 to-accent-50 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="h-80 flex items-center justify-center p-4 relative overflow-hidden">
           {product.images && product.images.length > 0 ? (
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
             />
           ) : (
             <div className="w-24 h-24 bg-white rounded-full shadow-lg flex items-center justify-center">
@@ -109,7 +109,7 @@ const ProductCard = ({ product }) => {
 
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="font-semibold text-lg text-gray-900">{product.name}</h3>
+          <h3 className="font-semibold text-lg text-gray-900 line-clamp-2">{product.name}</h3>
           <span className="bg-primary-100 text-primary-700 text-xs px-2 py-1 rounded-full">
             {product.category}
           </span>

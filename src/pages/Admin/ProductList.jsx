@@ -1,4 +1,4 @@
-// ✅ frontend/src/pages/Admin/ProductList.jsx (Final Merged & Commented Version)
+// ✅ frontend/src/pages/Admin/ProductList.jsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,7 +11,6 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Fetch products from backend API
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -24,7 +23,6 @@ const ProductList = () => {
     }
   };
 
-  // 🔹 Delete product (admin only)
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
@@ -48,14 +46,13 @@ const ProductList = () => {
       transition={{ duration: 0.5 }}
       className="section-padding"
     >
-      {/* 🔹 Page Header */}
+      {/* Page Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold text-gray-900">
           Product Management ({products.length})
         </h2>
 
         <div className="flex space-x-3">
-          {/* 🔁 Refresh Button */}
           <button
             onClick={fetchProducts}
             className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors inline-flex items-center space-x-2"
@@ -64,7 +61,6 @@ const ProductList = () => {
             <span>Refresh</span>
           </button>
 
-          {/* ➕ Add New Product */}
           <Link
             to="/admin/products/create"
             className="btn-primary inline-flex items-center space-x-2"
@@ -75,63 +71,85 @@ const ProductList = () => {
         </div>
       </div>
 
-      {/* 🔹 Conditional Loader */}
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="bg-white shadow-md rounded-xl p-6 overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            {/* === TABLE HEAD === */}
+        // 🔑 FIX 1: Removed `overflow-x-auto` — that was letting table push wider than screen.
+        //          Added `w-full` so container respects parent width.
+        <div className="bg-white shadow-md rounded-xl p-6 w-full">
+          {/* 
+            🔑 FIX 2: 
+            - `w-full` (not min-w-full) → table takes exactly parent width, no more
+            - `table-fixed` → forces browser to honor column widths
+          */}
+          <table className="w-full table-fixed divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {/* 
+                  🔑 FIX 3: Using percentage widths so it's responsive.
+                  Total = 100%
+                */}
+                <th className="w-[10%] px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="w-[35%] px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Name
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="w-[10%] px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Price
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="w-[20%] px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Stock
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="w-[10%] px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Featured
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="w-[15%] px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
 
-            {/* === TABLE BODY === */}
             <tbody className="bg-white divide-y divide-gray-200">
               {products.map((product) => (
                 <tr key={product._id} className="hover:bg-gray-50">
-                  {/* ID Column */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate max-w-xs">
+                  {/* ID */}
+                  <td className="px-4 py-4 text-sm text-gray-500 truncate">
                     {product._id.substring(18)}
                   </td>
 
-                  {/* Name Column */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {product.name}
+                  {/* 
+                    🔑 FIX 4: NAME cell 
+                    - NO whitespace-nowrap 
+                    - `break-words` allows wrapping to next line
+                    - OR use `truncate` if you want single-line with "..."
+                    Pick ONE approach below:
+                  */}
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">
+                    {/* Option A: Truncate with ellipsis + hover tooltip */}
+                    <div className="truncate" title={product.name}>
+                      {product.name}
+                    </div>
+
+                    {/* Option B (alternative): allow wrapping to multiple lines
+                    <div className="break-words">
+                      {product.name}
+                    </div>
+                    */}
                   </td>
 
-                  {/* Price Column */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {/* Price */}
+                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                     ₹{product.price}
                   </td>
 
-                  {/* Stock Column */}
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  {/* Stock */}
+                  <td className="px-4 py-4 whitespace-nowrap">
                     <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        product.countInStock > 0
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
-                      }`}
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${product.countInStock > 0
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                        }`}
                     >
                       {product.countInStock > 0
                         ? `In Stock (${product.countInStock})`
@@ -139,8 +157,8 @@ const ProductList = () => {
                     </span>
                   </td>
 
-                  {/* Featured Column */}
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
+                  {/* Featured */}
+                  <td className="px-4 py-4 whitespace-nowrap text-center">
                     {product.isFeatured ? (
                       <FiCheckCircle className="w-5 h-5 text-green-500 mx-auto" />
                     ) : (
@@ -148,52 +166,27 @@ const ProductList = () => {
                     )}
                   </td>
 
-                  {/* Actions Column */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <Link
-                      to={`/admin/products/edit/${product._id}`}
-                      className="text-primary-600 hover:text-primary-900 mr-4"
-                    >
-                      <FiEdit className="w-5 h-5" />
-                    </Link>
-                    <button
-                      onClick={() => deleteHandler(product._id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      <FiTrash2 className="w-5 h-5" />
-                    </button>
+                  {/* Actions */}
+                  <td className="px-4 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex items-center space-x-3">
+                      <Link
+                        to={`/admin/products/edit/${product._id}`}
+                        className="text-primary-600 hover:text-primary-900"
+                      >
+                        <FiEdit className="w-5 h-5" />
+                      </Link>
+                      <button
+                        onClick={() => deleteHandler(product._id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <FiTrash2 className="w-5 h-5" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-
-          {/* 🧩 (Commented Old Code Reference Below) */}
-          {/*
-            --- OLD STATIC MOCK DATA VERSION ---
-            const mockProducts = [
-              { _id: '1', name: 'Arappu Powder', price: 160, countInStock: 50, category: 'Hair Care' },
-              { _id: '2', name: 'Pure Castor Oil', price: 160, countInStock: 0, category: 'Hair & Skin Care' },
-            ];
-
-            Used previously like:
-            {mockProducts.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>₹{product.price}</td>
-                <td>
-                  <span className={product.countInStock > 0 ? 'bg-green-100' : 'bg-red-100'}>
-                    {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
-                  </span>
-                </td>
-                <td>
-                  <button><FiEdit /></button>
-                  <button><FiTrash2 /></button>
-                </td>
-              </tr>
-            ))}
-          */}
         </div>
       )}
     </motion.div>

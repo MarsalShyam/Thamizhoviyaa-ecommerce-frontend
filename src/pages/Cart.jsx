@@ -28,7 +28,7 @@ const Cart = () => {
     <div className="min-h-screen bg-gray-50 section-padding">
       <div className="container-custom">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
-        
+
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {cart.map((item) => (
@@ -42,7 +42,7 @@ const Cart = () => {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-20 h-20 object-cover rounded-lg"
+                    className="w-20 h-20 object-contain rounded-lg"
                   />
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900">{item.name}</h3>

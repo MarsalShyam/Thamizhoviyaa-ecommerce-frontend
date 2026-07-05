@@ -58,11 +58,11 @@ const Wishlist = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {wishlist.map((item, index) => {
-            const fullProduct = products.find(p => p.id === item.id) || item
-            
+            const fullProduct = products.find((p) => p._id === item._id || p.id === item.id) || item
+
             return (
               <motion.div
-                key={item.id}
+                key={item._id || item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
@@ -71,9 +71,13 @@ const Wishlist = () => {
                 {/* Product Image */}
                 <div className="relative overflow-hidden">
                   <img
-                    src={item.image}
+                    src={item.image ||
+                      item.images?.[0] ||
+                      fullProduct.image ||
+                      fullProduct.images?.[0] ||
+                      'https://via.placeholder.com/300x300?text=No+Image'}
                     alt={item.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                   <button
                     onClick={() => handleRemoveFromWishlist(fullProduct)}
@@ -91,9 +95,9 @@ const Wishlist = () => {
                       {fullProduct.category || 'Herbal Product'}
                     </span>
                   </div>
-                  
+
                   <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{item.name}</h3>
-                  
+
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-lg font-bold text-primary-600">₹{item.price}</span>
                     {fullProduct.originalPrice > item.price && (
@@ -151,7 +155,7 @@ const Wishlist = () => {
                 <FiShoppingCart className="w-5 h-5" />
                 <span>Add All to Cart</span>
               </button>
-              
+
               <Link
                 to="/cart"
                 className="bg-accent-400 hover:bg-accent-500 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2"
