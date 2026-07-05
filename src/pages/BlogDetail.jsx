@@ -41,10 +41,10 @@ const BlogDetail = () => {
   }
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6 }}
       className="bg-gray-50 min-h-screen py-10"
     >
       <div className="container-custom max-w-4xl">
@@ -55,9 +55,9 @@ const BlogDetail = () => {
         <article className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
           {/* Cover image / Banner */}
           <div className="h-64 md:h-96 w-full relative">
-            <img 
-              src={blog.thumbnail} 
-              alt={blog.title} 
+            <img
+              src={blog.thumbnail}
+              alt={blog.title}
               className="w-full h-full object-cover"
               onError={(e) => { e.target.src = 'https://placehold.co/800x450?text=Thamizhoviyaa+Herbal'; }}
             />

@@ -34,7 +34,7 @@ const Blog = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.6 }}
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Herbal Wisdom Blog</h1>
@@ -60,7 +60,7 @@ const Blog = () => {
                   key={post._id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
                 >
@@ -120,7 +120,7 @@ const Blog = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-16 bg-primary-600 rounded-2xl p-8 text-center text-white"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Stay Updated with Herbal Wisdom</h2>

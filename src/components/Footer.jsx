@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FiFacebook, FiInstagram, FiTwitter, FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
+import { FiFacebook, FiInstagram, FiTwitter, FiMail, FiPhone, FiMapPin, FiYoutube } from 'react-icons/fi'
 
 const Footer = () => {
   return (
@@ -28,14 +28,14 @@ const Footer = () => {
                 100% natural, chemical-free solutions for your health and beauty needs.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="bg-primary-600 hover:bg-primary-500 p-2 rounded-lg transition-colors">
+                <a href="https://facebook.com/ThamizhoviyaaOffi" className="bg-primary-600 hover:bg-primary-500 p-2 rounded-lg transition-colors">
                   <FiFacebook className="w-5 h-5" />
                 </a>
-                <a href="#" className="bg-primary-600 hover:bg-primary-500 p-2 rounded-lg transition-colors">
+                <a href="https://instagram.com/thamizhoviyaa_official" className="bg-primary-600 hover:bg-primary-500 p-2 rounded-lg transition-colors">
                   <FiInstagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="bg-primary-600 hover:bg-primary-500 p-2 rounded-lg transition-colors">
-                  <FiTwitter className="w-5 h-5" />
+                <a href="https://www.youtube.com/@admin_thamizhoviyaa" className="bg-primary-600 hover:bg-primary-500 p-2 rounded-lg transition-colors">
+                  <FiYoutube className="w-5 h-5" />
                 </a>
               </div>
             </div>
