@@ -479,7 +479,7 @@ const ProductDetail = () => {
 
               {/* Thumbnail Grid */}
               {images.length > 1 && (
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-4 gap-2">
                   {images.map((img, index) => (
                     <button
                       key={index}
@@ -492,7 +492,7 @@ const ProductDetail = () => {
                       <img
                         src={img}
                         alt={`View ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </button>
                   ))}
@@ -532,7 +532,7 @@ const ProductDetail = () => {
                   <span className="text-sm text-gray-500 font-mono">SKU: {selectedVariant && selectedVariant.sku ? selectedVariant.sku : product.sku}</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 leading-tight">
                   {product.name}
                 </h1>
 
@@ -586,8 +586,8 @@ const ProductDetail = () => {
                             key={color}
                             onClick={() => setSelectedColor(color)}
                             className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all ${selectedColor === color
-                                ? 'border-primary-600 bg-primary-50 text-primary-700 ring-2 ring-primary-600/20'
-                                : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                              ? 'border-primary-600 bg-primary-50 text-primary-700 ring-2 ring-primary-600/20'
+                              : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                               }`}
                           >
                             {color}
@@ -606,8 +606,8 @@ const ProductDetail = () => {
                             key={size}
                             onClick={() => setSelectedSize(size)}
                             className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all ${selectedSize === size
-                                ? 'border-primary-600 bg-primary-50 text-primary-700 ring-2 ring-primary-600/20'
-                                : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                              ? 'border-primary-600 bg-primary-50 text-primary-700 ring-2 ring-primary-600/20'
+                              : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                               }`}
                           >
                             {size}
@@ -626,8 +626,8 @@ const ProductDetail = () => {
                             key={name}
                             onClick={() => setSelectedCustomName(name)}
                             className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all ${selectedCustomName === name
-                                ? 'border-primary-600 bg-primary-50 text-primary-700 ring-2 ring-primary-600/20'
-                                : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+                              ? 'border-primary-600 bg-primary-50 text-primary-700 ring-2 ring-primary-600/20'
+                              : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                               }`}
                           >
                             {name}
