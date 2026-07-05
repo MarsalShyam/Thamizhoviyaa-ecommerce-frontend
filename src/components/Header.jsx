@@ -35,14 +35,14 @@ const Header = () => {
                     <Link to="/" className="flex items-center space-x-2">
                         <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center overflow-hidden">
                             <img
-                                src="/images/logo.png"
+                                src="/thamizhoviyaa-logo.png"
                                 alt="Thamizhoviyaa Logo"
                                 className="w-full h-full object-contain"
                             />
                         </div>
                         <div>
                             <h1 className="text-xl font-bold text-primary-700">THAMIZHOVIYAA</h1>
-                            <p className="text-xs text-gray-600">Herbal Products</p>
+                            <p className="text-xs text-gray-600">Herbal Products ◦ Home Goodies</p>
                         </div>
                     </Link>
 

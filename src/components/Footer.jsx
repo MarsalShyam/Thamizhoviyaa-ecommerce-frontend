@@ -11,8 +11,12 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <Link to="/" className="flex items-center space-x-2 mb-4">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-primary-600 font-bold text-lg">T</span>
+                <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/thamizhoviyaa-logo.png"
+                    alt="Thamizhoviyaa Logo"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-white">THAMIZHOVIYAA</h1>

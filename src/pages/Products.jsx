@@ -11,7 +11,8 @@ const CATEGORIES = [
   "Hair Care",
   "Skin Care",
   "Bath & Body",
-  "Wellness"
+  "Wellness",
+  "Cotton Dhoti"
 ];
 
 const Products = () => {
