@@ -3,9 +3,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiUsers, FiTarget, FiHeart, FiAward, FiPlay } from 'react-icons/fi'
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { FiYoutube, FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi';
+import {
+    FiUsers, FiTarget, FiHeart, FiAward, FiPlay, FiYoutube,
+    FiChevronLeft, FiChevronRight, FiArrowRight, FiCheckCircle,
+    FiInfo, FiShield, FiBriefcase, FiTrendingUp
+} from 'react-icons/fi';
 
 const About = () => {
     const values = [
@@ -30,6 +33,26 @@ const About = () => {
             description: 'Preserving ancient Tamil herbal knowledge'
         }
     ]
+    const albumImages = [
+        { id: 1, title: 'Our Office', img: 'https://5.imimg.com/data5/SELLER/Default/2025/10/552407500/WG/BA/ZX/104667245/op-1000x1000.jpg', desc: 'Administrative Hub' },
+        { id: 2, title: 'Manufacturing Unit', img: 'https://5.imimg.com/data5/SELLER/Default/2025/10/552622589/VD/OZ/UP/104667245/l-1000x1000.jpg', desc: 'Traditional Processing Center' },
+        { id: 3, title: 'Our Stock', img: 'https://5.imimg.com/data5/SELLER/Default/2025/10/552407704/GF/RW/GO/104667245/op1-1000x1000.jpg', desc: 'Ready for Dispatch' }
+    ];
+
+
+    const factsheet = {
+        basic: [
+            { label: 'Nature of Business', value: 'Manufacturer' },
+            { label: 'Additional Business', value: 'Wholesaler, Retailer' },
+            { label: 'Company CEO', value: 'Priyanka Giri' },
+            { label: 'Total Number of Employees', value: 'Up to 10 People' },
+            { label: 'GST Registration Date', value: '2024' },
+            { label: 'Legal Status of Firm', value: 'Proprietorship' }
+        ],
+        statutory: [
+            { label: 'GST No.', value: '33HIEPP9810A1ZF' },
+        ]
+    };
 
     // YouTube video data - replace with your actual video embed codes later
     const youtubeVideos = [
@@ -438,6 +461,152 @@ const About = () => {
                     </motion.div>
                 </div>
             </section>
+
+            {/* --- 1. COMPANY ALBUM SECTION (NEW) --- */}
+            <section className="section-padding bg-white">
+                <div className="container-custom">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Company Album</h2>
+                        <p className="text-gray-600 mt-2">A glimpse into our professional workspace and production units</p>
+                    </motion.div>
+
+                    {/* Responsive Gallery: Row on Desktop, Scroll on Mobile */}
+                    <div className="flex lg:grid lg:grid-cols-3 gap-6 overflow-x-auto lg:overflow-visible pb-6 lg:pb-0 snap-x snap-mandatory scrollbar-hide">
+                        {albumImages.map((image) => (
+                            <motion.div
+                                key={image.id}
+                                whileHover={{ y: -10 }}
+                                className="flex-shrink-0 w-[80vw] sm:w-[60vw] lg:w-full snap-center bg-gray-50 rounded-2xl overflow-hidden shadow-md"
+                            >
+                                <div className="h-64 overflow-hidden">
+                                    <img src={image.img} alt={image.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                                </div>
+                                <div className="p-4 text-center">
+                                    <h3 className="font-bold text-lg text-gray-900">{image.title}</h3>
+                                    <p className="text-sm text-primary-600 font-medium">{image.desc}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* --- 2. WHY US? SECTION (NEW) --- */}
+            {/* --- 2. WHY US? SECTION (Simplified) --- */}
+            <section className="section-padding bg-gray-50">
+                <div className="container-custom">
+                    <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
+
+                        {/* Heading Part */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="lg:col-span-1"
+                        >
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                Why Us?
+                            </h2>
+                            <div className="w-16 h-1 bg-primary-600 rounded-full"></div>
+                        </motion.div>
+
+                        {/* Description Part */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="lg:col-span-2 space-y-6"
+                        >
+                            <p className="text-lg text-gray-700 leading-relaxed">
+                                • At Thamizhoviyaa Home Goodies, we take pride in offering products that are deeply rooted in Tamil tradition and crafted with utmost purity.
+                            </p>
+                            <p className="text-lg text-gray-700 leading-relaxed">
+                                • Our commitment to quality ensures that every item—from our soft cotton dhotis to our natural oils and powders—is made using time-tested, chemical-free methods.
+                            </p>
+                            <p className="text-lg text-gray-700 leading-relaxed">
+                                • We source only the finest raw materials to deliver authentic, eco-friendly products that promote health and well-being.
+                            </p>
+                            <p className="text-lg text-gray-700 leading-relaxed font-medium text-primary-900">
+                                • With a focus on sustainability, tradition, and customer satisfaction, we stand apart in preserving heritage while meeting modern needs.
+                            </p>
+                        </motion.div>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* --- 3. FACTSHEET SECTION (NEW) --- */}
+            <section className="section-padding bg-gray-50">
+                <div className="container-custom">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Factsheet</h2>
+                        <p className="text-gray-600">Key information and legal profile of our organization</p>
+                    </motion.div>
+
+                    <div className="grid lg:grid-cols-2 gap-10">
+                        {/* Basic Information */}
+                        <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white rounded-3xl shadow-xl overflow-hidden">
+                            <div className="bg-primary-600 p-6 flex items-center space-x-3 text-white">
+                                <FiInfo className="w-6 h-6" />
+                                <h3 className="text-xl font-bold">Basic Information</h3>
+                            </div>
+                            <div className="p-2 sm:p-6">
+                                <table className="w-full text-sm sm:text-base">
+                                    <tbody>
+                                        {factsheet.basic.map((item, idx) => (
+                                            <tr key={idx} className={idx !== factsheet.basic.length - 1 ? "border-b border-gray-100" : ""}>
+                                                <td className="py-4 px-2 font-semibold text-gray-600 w-1/2">{item.label}</td>
+                                                <td className="py-4 px-2 text-gray-900">{item.value}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </motion.div>
+
+                        {/* Statutory Profile */}
+                        <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col">
+                            <div className="bg-accent-500 p-6 flex items-center space-x-3 text-white">
+                                <FiCheckCircle className="w-6 h-6" />
+                                <h3 className="text-xl font-bold">Statutory Profile</h3>
+                            </div>
+                            <div className="p-2 sm:p-6 flex-grow">
+                                <table className="w-full text-sm sm:text-base">
+                                    <tbody>
+                                        {factsheet.statutory.map((item, idx) => (
+                                            <tr key={idx} className={idx !== factsheet.statutory.length - 1 ? "border-b border-gray-100" : ""}>
+                                                <td className="py-4 px-2 font-semibold text-gray-600 w-1/2">{item.label}</td>
+                                                <td className="py-4 px-2 text-gray-900 font-mono text-sm">{item.value}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                <div className="mt-4 p-4 bg-green-50 rounded-xl border border-green-100">
+                                    <p className="text-green-800 text-sm flex items-center gap-1">
+                                        <FiCheckCircle className="mr-2" /> Verified Business Profile on <a className='underline font-bold hover:text-primary-600' href='https://www.indiamart.com/thamizhoviyaa-home-goodies/' alt=''> IndiaMart</a>
+                                    </p>
+                                </div>
+                                <div className="mt-2 p-4 bg-green-50 rounded-xl border border-green-100">
+                                    <p className="text-green-800 text-sm flex items-center gap-1">
+                                        <FiCheckCircle className="mr-2" /> Verified Business Profile on <a className='underline font-bold hover:text-primary-600' href='https://www.amazon.in/l/27943762031?me=A37Z9DBTUAOAAM&ref_=ssf_share' alt=''> Amazon</a>
+                                    </p>
+                                </div>
+                                <div className="mt-2 p-4 bg-green-50 rounded-xl border border-green-100">
+                                    <p className="text-green-800 text-sm flex items-center gap-1">
+                                        <FiCheckCircle className="mr-2" /> Verified Business Profile on <a className='underline font-bold hover:text-primary-600' href='https://www.justdial.com/Namakkal/Thamizhoviyaa-Home-Goodies-Kalangani/9999P4286-4286-250906043019-U9Q4_BZDET' alt=''> Justdial</a>
+                                    </p>
+                                </div>
+                                <div className="mt-2 p-4 bg-green-50 rounded-xl border border-green-100">
+                                    <p className="text-green-800 text-sm flex items-center gap-1">
+                                        <FiCheckCircle className="mr-2" /> Verified Business Profile on <a className='underline font-bold hover:text-primary-600' href='https://www.desertcart.ae/products/774026841-thamizhoviyaa-pure-arappu-powder-natural-hair-wash-and-conditioner-albizia' alt=''>Desertcart UAE</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
 
             {/* Values Section */}
             <section className="section-padding bg-white">
