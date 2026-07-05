@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Hero from '../components/Hero'
@@ -8,6 +8,7 @@ import { FiTruck, FiShield, FiAward, FiHeart } from 'react-icons/fi'
 import axios from 'axios'
 import { ProductGridSkeleton } from '../components/SkeletonLoader'
 import Testimonials from '../components/Testimonials'
+import Marketplaces from '../components/Marketplaces'
 
 
 const Home = () => {
@@ -205,7 +206,9 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Testimonials/>
+            <Marketplaces />
+            <Testimonials />
+
         </div>
     )
 }

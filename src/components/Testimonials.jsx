@@ -1,110 +1,3 @@
-// import React from "react";
-// import { motion } from "framer-motion";
-// import { FiStar } from "react-icons/fi";
-
-// const testimonials = [
-//   {
-//     name: "Priya R.",
-//     location: "Chennai",
-//     message:
-//       "I have been using Thamizhoviyaa herbal hair oil for 3 months. My hair fall reduced drastically and the natural shine returned. Completely satisfied!",
-//     image: "https://tse2.mm.bing.net/th/id/OIP.27kz4GeESmPrR3omDRYVyQHaHa?pid=Api&P=0&h=180",
-//     rating: 5,
-//   },
-//   {
-//     name: "Suresh Kumar",
-//     location: "Coimbatore",
-//     message:
-//       "Authentic herbal products with zero chemicals. The skin care powder worked wonders for my face. Highly recommended!",
-//     image: "https://tse2.mm.bing.net/th/id/OIP.27kz4GeESmPrR3omDRYVyQHaHa?pid=Api&P=0&h=180",
-//     rating: 5,
-//   },
-//   {
-//     name: "Lakshmi Devi",
-//     location: "Madurai",
-//     message:
-//       "Pure, natural and effective. I loved the aroma and results of their herbal hair pack. Perfect for regular use!",
-//     image: "https://tse2.mm.bing.net/th/id/OIP.27kz4GeESmPrR3omDRYVyQHaHa?pid=Api&P=0&h=180",
-//     rating: 5,
-//   },
-//   {
-//     name: "Raghav",
-//     location: "Erode",
-//     message:
-//       "A brand that truly respects traditional Tamil herbal wisdom. The products feel fresh and genuinely natural.",
-//     image: "https://tse2.mm.bing.net/th/id/OIP.27kz4GeESmPrR3omDRYVyQHaHa?pid=Api&P=0&h=180",
-//     rating: 4,
-//   },
-// ];
-
-// const Testimonials = () => {
-//   return (
-//     <section className="section-padding bg-gray-50 overflow-hidden">
-//       <div className="container-custom text-center mb-10">
-//         <motion.h2
-//           initial={{ opacity: 0, y: 20 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.6 }}
-//           className="text-3xl md:text-4xl font-bold text-gray-900"
-//         >
-//           What Our Customers Say
-//         </motion.h2>
-//         <p className="text-gray-600 mt-2 text-lg">
-//           Real experiences from people who trust Thamizhoviyaa
-//         </p>
-//       </div>
-
-//       {/* Infinite slider container */}
-//       <div className="relative w-full overflow-hidden">
-//         <motion.div
-//           className="flex gap-6"
-//           initial={{ x: 0 }}
-//           animate={{ x: "-100%" }}
-//           transition={{
-//             repeat: Infinity,
-//             duration: 10,
-//             ease: "linear",
-//           }}
-//         >
-//           {/* Duplicate list twice for infinite loop */}
-//           {[...testimonials, ...testimonials].map((t, index) => (
-//             <div
-//               key={index}
-//               className="min-w-[280px] sm:min-w-[350px] md:min-w-[400px] bg-white shadow-md rounded-xl p-6 border hover:shadow-lg transition-all"
-//             >
-//               <div className="flex items-center gap-4 mb-4">
-//                 <img
-//                   src={t.image}
-//                   alt={t.name}
-//                   className="w-12 h-12 rounded-full object-cover border"
-//                 />
-//                 <div className="text-left">
-//                   <h3 className="text-xl font-semibold text-gray-900">
-//                     {t.name}
-//                   </h3>
-//                   <p className="text-sm text-gray-600">{t.location}</p>
-//                 </div>
-//               </div>
-
-//               <p className="text-gray-700 text-left italic">{t.message}</p>
-
-//               {/* Stars */}
-//               <div className="flex mt-4">
-//                 {Array.from({ length: t.rating }).map((_, i) => (
-//                   <FiStar key={i} className="text-yellow-500" />
-//                 ))}
-//               </div>
-//             </div>
-//           ))}
-//         </motion.div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Testimonials;
-
-
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -116,7 +9,7 @@ const testimonials = [
         name: "Priya R.",
         location: "Chennai",
         message: "I have been using Thamizhoviyaa herbal hair oil for 3 months. My hair fall reduced drastically and the natural shine returned. Completely satisfied!",
-        image: "https://tse2.mm.bing.net/th/id/OIP.27kz4GeESmPrR3omDRYVyQHaHa?pid=Api&P=0&h=180",
+        image: "https://plus.unsplash.com/premium_photo-1723568666044-1b066e26b1fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dGFtaWwlMjBwZW9wbGV8ZW58MHx8MHx8fDA%3D",
         rating: 5,
         product: "Herbal Hair Oil"
     },
@@ -131,19 +24,19 @@ const testimonials = [
     },
     {
         id: 3,
-        name: "Lakshmi Devi",
+        name: "R. Krishna Kumar",
         location: "Madurai",
         message: "Pure, natural and effective. I loved the aroma and results of their herbal hair pack. Perfect for regular use!",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80",
+        image: "https://plus.unsplash.com/premium_photo-1691031428988-4a4a761b706d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI4fHx0YW1pbCUyMHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 5,
         product: "Herbal Hair Pack"
     },
     {
         id: 4,
-        name: "Raghav",
+        name: "M. Raghav",
         location: "Erode",
         message: "A brand that truly respects traditional Tamil herbal wisdom. The products feel fresh and genuinely natural.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80",
+        image: "https://images.unsplash.com/photo-1746961898943-1a2165fc2492?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU3fHx0YW1pbCUyMHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D",
         rating: 4,
         product: "Herbal Collection"
     },
@@ -243,7 +136,7 @@ const Testimonials = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
+                    transition={{ duration: 0.4 }}
                     className="max-w-2xl mx-auto"
                 >
                     <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-primary-700 bg-clip-text text-transparent mb-2 md:mb-4">
@@ -272,8 +165,8 @@ const Testimonials = () => {
                                 exit="exit"
                                 transition={{
                                     x: { type: "spring", stiffness: 300, damping: 30 },
-                                    opacity: { duration: 0.4 },
-                                    scale: { duration: 0.4 }
+                                    opacity: { duration: 0.3 },
+                                    scale: { duration: 0.3 }
                                 }}
                                 className="text-center px-4 py-6 md:px-8"
                             >
@@ -299,7 +192,7 @@ const Testimonials = () => {
                                     className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8 font-medium"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.3 }}
+                                    transition={{ delay: 0.2 }}
                                 >
                                     "{testimonials[currentIndex].message}"
                                 </motion.blockquote>
@@ -309,14 +202,14 @@ const Testimonials = () => {
                                     className="flex flex-col items-center"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5 }}
+                                    transition={{ delay: 0.3 }}
                                 >
                                     <div className="relative mb-4">
-                                        <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-white shadow-lg">
                                             <img
                                                 src={testimonials[currentIndex].image}
                                                 alt={testimonials[currentIndex].name}
-                                                className="w-full h-full object-cover"
+                                                className="w-full h-full object-cover top-0"
                                             />
                                         </div>
                                         {/* <div className="absolute -bottom-1 -right-1 bg-primary-500 text-white text-xs px-2 py-1 rounded-full">
@@ -337,7 +230,7 @@ const Testimonials = () => {
                         </AnimatePresence>
 
                         {/* Navigation controls */}
-                        
+
                     </div>
                 </div>
 
@@ -380,7 +273,7 @@ const Testimonials = () => {
                         { number: "500+", label: "Happy Customers" },
                         { number: "98%", label: "Satisfaction Rate" },
                         { number: "4.9", label: "Average Rating" },
-                        { number: "10+", label: "Products" }
+                        { number: "30+", label: "Products" }
                     ].map((stat, index) => (
                         <motion.div
                             key={stat.label}
