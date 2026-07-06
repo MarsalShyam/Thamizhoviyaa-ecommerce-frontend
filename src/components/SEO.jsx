@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SEO = ({ title, description, keywords }) => {
+const SEO = ({ title, description, keywords, schema }) => {
   useEffect(() => {
     // 1. Title
     if (title) {
@@ -47,7 +47,24 @@ const SEO = ({ title, description, keywords }) => {
         document.head.appendChild(metaKeywords);
       }
     }
-  }, [title, description, keywords]);
+    // 4. Structured Data (Schema.org)
+    if (schema) {
+      let script = document.querySelector('script[type="application/ld+json"][id="seo-schema"]');
+      if (!script) {
+        script = document.createElement('script');
+        script.setAttribute('type', 'application/ld+json');
+        script.setAttribute('id', 'seo-schema');
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(schema);
+    } else {
+      // Remove if no schema is provided to prevent stale data
+      const script = document.querySelector('script[type="application/ld+json"][id="seo-schema"]');
+      if (script) {
+        script.remove();
+      }
+    }
+  }, [title, description, keywords, schema]);
 
   return null;
 };
