@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FiCalendar, FiUser, FiArrowRight } from 'react-icons/fi'
 import axios from 'axios'
 import LoadingSpinner from '../components/LoadingSpinner'
+import SEO from '../components/SEO'
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -28,6 +29,11 @@ const Blog = () => {
 
   return (
     <div>
+      <SEO 
+        title="Herbal Wellness Blog" 
+        description="Read the latest articles on traditional Tamil herbal remedies, wellness tips, benefits of organic skin care, and natural hair care recipes on the Thamizhoviyaa blog." 
+        keywords="herbal blog, wellness tips, traditional remedies, organic lifestyle blog, natural beauty tips" 
+      />
       {/* Header */}
       <section className="bg-primary-600 text-white section-padding">
         <div className="container-custom">

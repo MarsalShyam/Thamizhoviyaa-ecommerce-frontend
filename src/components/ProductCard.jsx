@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext' // Import Auth
+import { toast } from 'react-toastify'
 import { FiShoppingCart, FiEye, FiHeart } from 'react-icons/fi'
 
 const ProductCard = ({ product }) => {
@@ -14,7 +15,7 @@ const ProductCard = ({ product }) => {
 
   const handleActionCheck = (action) => {
     if (!isAuthenticated) {
-      alert(`Please sign in to ${action}.`)
+      toast.warning(`Please sign in to ${action}.`)
       // You can also redirect here: navigate('/login')
       return false
     }
@@ -26,7 +27,7 @@ const ProductCard = ({ product }) => {
     e.stopPropagation()
     if (handleActionCheck('add items to cart')) {
       addToCart(product, 1)
-      // Add a toast notification here later
+      toast.success(`${product.name} added to cart!`)
     }
   }
 

@@ -7,6 +7,8 @@ import { FiArrowLeft, FiCreditCard, FiCheckCircle, FiShoppingBag, FiPlus, FiMinu
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import SEO from '../components/SEO';
 
 // --- Razorpay Script Loader ---
 const loadRazorpayScript = (src) =>
@@ -107,7 +109,7 @@ const Checkout = () => {
   const placeOrderOnServer = async (paymentDetails = {}) => {
     const addressToUse = selectedAddress || newAddress;
     if (!validateAddress(addressToUse)) {
-      alert('Please fill in shipping details before placing order.');
+      toast.warning('Please fill in shipping details before placing order.');
       return;
     }
     // If using a brand-new address (not selected from saved ones), save it to DB
@@ -126,7 +128,7 @@ const Checkout = () => {
     }));
 
     if (orderItems.length === 0) {
-      alert('No items selected for checkout.');
+      toast.warning('No items selected for checkout.');
       setLoading(false);
       return;
     }
@@ -154,10 +156,10 @@ const Checkout = () => {
 
       await fetchCart();
       clearCheckoutItems();
-      alert(`Order placed successfully! Order ID: ${data._id}`);
+      toast.success(`Order placed successfully! Order ID: ${data._id}`);
       navigate('/profile/orders');
     } catch (err) {
-      alert(`Order Failed: ${err.response?.data?.message || err.message}`);
+      toast.error(`Order Failed: ${err.response?.data?.message || err.message}`);
     } finally {
       setLoading(false);
     }
@@ -167,14 +169,14 @@ const Checkout = () => {
   const displayRazorpay = async () => {
     const addressToUse = selectedAddress || newAddress;
     if (!validateAddress(addressToUse)) {
-      alert('Please fill in shipping details before payment.');
+      toast.warning('Please fill in shipping details before payment.');
       return;
     }
 
     setLoading(true);
     const loaded = await loadRazorpayScript('https://checkout.razorpay.com/v1/checkout.js');
     if (!loaded) {
-      alert('Razorpay SDK failed to load. Check network.');
+      toast.error('Razorpay SDK failed to load. Check network.');
       setLoading(false);
       return;
     }
@@ -201,9 +203,9 @@ const Checkout = () => {
             });
             if (verifyResp.data.success) {
               await placeOrderOnServer({ id: response.razorpay_payment_id });
-            } else alert('Payment verification failed.');
+            } else toast.error('Payment verification failed.');
           } catch {
-            alert('Payment verification failed.');
+            toast.error('Payment verification failed.');
           }
         },
         prefill: {
@@ -216,7 +218,7 @@ const Checkout = () => {
 
       new window.Razorpay(options).open();
     } catch {
-      alert('Failed to initialize payment. Try again.');
+      toast.error('Failed to initialize payment. Try again.');
     } finally {
       setLoading(false);
     }
@@ -226,7 +228,7 @@ const Checkout = () => {
     e?.preventDefault?.();
     const addressToUse = selectedAddress || newAddress;
     if (!validateAddress(addressToUse)) {
-      alert('Please fill in shipping details before placing order.');
+      toast.warning('Please fill in shipping details before placing order.');
       return;
     }
     if (paymentMethod === 'razorpay') await displayRazorpay();
@@ -242,6 +244,11 @@ const Checkout = () => {
   if (!checkoutItems || checkoutItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 section-padding">
+        <SEO 
+          title="Secure Checkout" 
+          description="Complete your purchase securely. Enter your shipping address and payment details to order your favorite natural herbal products." 
+          keywords="secure checkout, buy herbal products, online payment" 
+        />
         <div className="container-custom">
           <div className="text-center py-16">
             <FiShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
@@ -260,6 +267,11 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 section-padding">
+      <SEO 
+        title="Secure Checkout" 
+        description="Complete your purchase securely. Enter your shipping address and payment details to order your favorite natural herbal products." 
+        keywords="secure checkout, buy herbal products, online payment" 
+      />
       <div className="container-custom">
         <Link to="/cart" className="inline-flex items-center text-primary-600 hover:text-primary-700 mb-6">
           <FiArrowLeft className="w-4 h-4 mr-2" /> Back to Cart

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiPlus, FiEdit, FiTrash2, FiRefreshCw, FiCheckCircle, FiX } from 'react-icons/fi';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 const ProductList = () => {
@@ -17,7 +18,7 @@ const ProductList = () => {
       const { data } = await axios.get('/api/products');
       setProducts(data);
     } catch (error) {
-      alert(`Error fetching products: ${error.response?.data?.message || error.message}`);
+      toast.error(`Error fetching products: ${error.response?.data?.message || error.message}`);
     } finally {
       setLoading(false);
     }
@@ -27,10 +28,10 @@ const ProductList = () => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
         await axios.delete(`/api/products/admin/${id}`);
-        alert('✅ Product deleted successfully.');
+        toast.success('Product deleted successfully.');
         fetchProducts();
       } catch (error) {
-        alert(`Error deleting product: ${error.response?.data?.message || error.message}`);
+        toast.error(`Error deleting product: ${error.response?.data?.message || error.message}`);
       }
     }
   };

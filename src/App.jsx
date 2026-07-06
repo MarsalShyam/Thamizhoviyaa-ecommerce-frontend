@@ -42,10 +42,13 @@ import AdminUserList from './pages/Admin/AdminUserList'
 import AdminCMS from './pages/Admin/CMS'
 import BlogDetail from './pages/BlogDetail'
 
+import FloatingContact from './components/FloatingContact'
+
 // === Layout ===
 const MainLayout = () => (
   <>
     <Header />
+    {/* <FloatingContact /> */}
     <main className="flex-grow">
       <Outlet />
     </main>

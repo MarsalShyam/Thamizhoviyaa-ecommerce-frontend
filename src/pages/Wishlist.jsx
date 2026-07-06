@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { useCart } from '../context/CartContext'
 import { FiHeart, FiShoppingCart, FiTrash2, FiArrowRight } from 'react-icons/fi'
 import { products } from '../data/products'
+import { toast } from 'react-toastify'
+import SEO from '../components/SEO'
 
 const Wishlist = () => {
   const { wishlist, toggleWishlist, addToCart } = useCart()
@@ -15,18 +17,23 @@ const Wishlist = () => {
   const handleAddToCart = (product) => {
     addToCart(product, 1)
     // Optional: Show success message
-    alert(`${product.name} added to cart!`)
+    toast.success(`${product.name} added to cart!`)
   }
 
   const handleMoveToCart = (product) => {
     addToCart(product, 1)
     toggleWishlist(product)
-    alert(`${product.name} moved to cart!`)
+    toast.success(`${product.name} moved to cart!`)
   }
 
   if (wishlist.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 section-padding">
+        <SEO 
+          title="My Wishlist" 
+          description="View your saved herbal products. Keep track of your favorite organic wellness and skin care goodies." 
+          keywords="my wishlist, saved products, organic list" 
+        />
         <div className="container-custom">
           <div className="text-center py-16">
             <div className="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -45,6 +52,11 @@ const Wishlist = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 section-padding">
+      <SEO 
+        title="My Wishlist" 
+        description="View your saved herbal products. Keep track of your favorite organic wellness and skin care goodies." 
+        keywords="my wishlist, saved products, organic list" 
+      />
       <div className="container-custom">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -148,7 +160,7 @@ const Wishlist = () => {
                     const fullProduct = products.find(p => p.id === item.id) || item
                     addToCart(fullProduct, 1)
                   })
-                  alert('All items added to cart!')
+                  toast.success('All items added to cart!')
                 }}
                 className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2"
               >

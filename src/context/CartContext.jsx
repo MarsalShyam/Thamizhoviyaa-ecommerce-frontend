@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import { toast } from 'react-toastify';
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
@@ -131,7 +132,7 @@ export const CartProvider = ({ children }) => {
   // cart actions
   const addToCart = async (product, quantity = 1) => {
     if (!isAuthenticated) {
-      alert('Please sign in to add items to your cart.');
+      toast.warning('Please sign in to add items to your cart.');
       return;
     }
     try {
@@ -139,7 +140,7 @@ export const CartProvider = ({ children }) => {
       setCart(data.cart || []);
       setCartCount((data.cart || []).reduce((t, i) => t + (i.quantity || 0), 0));
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to add to cart.');
+      toast.error(err.response?.data?.message || 'Failed to add to cart.');
     }
   };
 
@@ -150,7 +151,7 @@ export const CartProvider = ({ children }) => {
       setCart(data.cart || []);
       setCartCount((data.cart || []).reduce((t, i) => t + (i.quantity || 0), 0));
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to remove from cart.');
+      toast.error(err.response?.data?.message || 'Failed to remove from cart.');
     }
   };
 
@@ -161,14 +162,14 @@ export const CartProvider = ({ children }) => {
       setCart(data.cart || []);
       setCartCount((data.cart || []).reduce((t, i) => t + (i.quantity || 0), 0));
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to update quantity.');
+      toast.error(err.response?.data?.message || 'Failed to update quantity.');
     }
   };
 
   // wishlist
   const toggleWishlist = async (product) => {
     if (!isAuthenticated) {
-      alert('Please sign in to manage your wishlist.');
+      toast.warning('Please sign in to manage your wishlist.');
       return;
     }
     try {
@@ -178,7 +179,7 @@ export const CartProvider = ({ children }) => {
       const { data } = await axios({ method, url });
       setWishlist(data.wishlist || []);
     } catch (err) {
-      alert(err.response?.data?.message || 'Wishlist update failed.');
+      toast.error(err.response?.data?.message || 'Wishlist update failed.');
     }
   };
 

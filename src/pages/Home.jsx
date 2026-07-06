@@ -9,7 +9,7 @@ import axios from 'axios'
 import { ProductGridSkeleton } from '../components/SkeletonLoader'
 import Testimonials from '../components/Testimonials'
 import Marketplaces from '../components/Marketplaces'
-
+import SEO from '../components/SEO'
 
 const Home = () => {
     // const featuredProducts = products.filter(product => product.featured)
@@ -56,6 +56,11 @@ const Home = () => {
 
     return (
         <div>
+            <SEO 
+              title="Home" 
+              description="Experience the purity of traditional Tamil herbal wisdom with Thamizhoviyaa. Shop 100% natural, chemical-free herbal hair oil, skin care, bath powder, and home goodies." 
+              keywords="Thamizhoviyaa, herbal products, natural skincare, organic haircare, traditional tamil herbs, herbal bath powder, home goodies, chemical-free wellness" 
+            />
             <Hero />
 
             {/* Features Section */}

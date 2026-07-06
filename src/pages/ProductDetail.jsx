@@ -7,6 +7,7 @@ import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import SEO from '../components/SEO'
 import LoadingSpinner from '../components/LoadingSpinner'
 import {
   FiShoppingCart,
@@ -243,13 +244,13 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
-      alert('Please sign in to add items to cart.')
+      toast.warning('Please sign in to add items to cart.')
       navigate('/login')
       return
     }
     const finalStock = selectedVariant ? selectedVariant.stock : product.countInStock
     if (finalStock <= 0) {
-      alert('Selected option is out of stock.')
+      toast.error('Selected option is out of stock.')
       return
     }
 
@@ -264,18 +265,18 @@ const ProductDetail = () => {
     }
 
     addToCart(cartProduct, quantity)
-    alert(`${quantity} ${product.name} ${selectedVariant ? `(${selectedVariant.color || ''} ${selectedVariant.size || ''})` : ''} added to cart!`)
+    toast.success(`${quantity} ${product.name} ${selectedVariant ? `(${selectedVariant.color || ''} ${selectedVariant.size || ''})` : ''} added to cart!`)
   }
 
   const handleBuyNow = () => {
     if (!isAuthenticated) {
-      alert('Please sign in to proceed to checkout.')
+      toast.warning('Please sign in to proceed to checkout.')
       navigate('/login')
       return
     }
     const finalStock = selectedVariant ? selectedVariant.stock : product.countInStock
     if (finalStock <= 0) {
-      alert('Selected option is out of stock.')
+      toast.error('Selected option is out of stock.')
       return
     }
 
@@ -293,7 +294,7 @@ const ProductDetail = () => {
   }
   //   const handleBuyNow = () => {
   //   if (!isAuthenticated) {
-  //     alert('Please sign in to proceed to checkout.');
+  //     toast.warning('Please sign in to proceed to checkout.');
   //     navigate('/login');
   //     return;
   //   }
@@ -309,7 +310,7 @@ const ProductDetail = () => {
 
   const handleToggleWishlist = () => {
     if (!isAuthenticated) {
-      alert('Please sign in to add to wishlist.')
+      toast.warning('Please sign in to add to wishlist.')
       navigate('/login')
       return
     }
@@ -329,16 +330,16 @@ const ProductDetail = () => {
         await navigator.share(shareData)
       } else {
         await navigator.clipboard.writeText(window.location.href)
-        alert('Product link copied to clipboard!')
+        toast.success('Product link copied to clipboard!')
       }
     } catch (err) {
       if (err.name !== 'AbortError') {
         console.error('Error sharing:', err)
         try {
           await navigator.clipboard.writeText(window.location.href)
-          alert('Product link copied to clipboard!')
+          toast.success('Product link copied to clipboard!')
         } catch (clipboardErr) {
-          alert('Unable to share. Please copy the URL from your browser.')
+          toast.error('Unable to share. Please copy the URL from your browser.')
         }
       }
     }
@@ -405,6 +406,11 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title={product.name} 
+        description={`Buy ${product.name} from Thamizhoviyaa. 100% organic, traditional, and chemical-free.`} 
+        keywords={`${product.name}, buy ${product.name} online, ${product.category || 'herbal products'}, natural ${product.name}`} 
+      />
       {/* Breadcrumb */}
       <div className="bg-white border-b sticky top-0 z-30 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useCart } from '../context/CartContext'
 import { FiTrash2, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi'
+import SEO from '../components/SEO'
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, getCartTotal } = useCart()
@@ -10,6 +11,11 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 section-padding">
+        <SEO 
+          title="Shopping Cart" 
+          description="Review the products in your shopping cart before proceeding to checkout. Secure shopping for 100% natural herbal goodies." 
+          keywords="shopping cart, checkout, herbal products cart" 
+        />
         <div className="container-custom">
           <div className="text-center py-16">
             <FiShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
@@ -26,6 +32,11 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 section-padding">
+      <SEO 
+        title="Shopping Cart" 
+        description="Review the products in your shopping cart before proceeding to checkout. Secure shopping for 100% natural herbal goodies." 
+        keywords="shopping cart, checkout, herbal products cart" 
+      />
       <div className="container-custom">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
 

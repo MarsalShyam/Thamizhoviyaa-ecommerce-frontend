@@ -9,6 +9,7 @@ import {
     FiChevronLeft, FiChevronRight, FiArrowRight, FiCheckCircle,
     FiInfo, FiShield, FiBriefcase, FiTrendingUp
 } from 'react-icons/fi';
+import SEO from '../components/SEO';
 
 const About = () => {
     const values = [
@@ -151,6 +152,11 @@ const About = () => {
 
     return (
         <div>
+            <SEO 
+              title="About Us" 
+              description="Learn about Thamizhoviyaa's journey, our commitment to natural wellness, and how we bring traditional Tamil herbal secrets to modern lifestyle." 
+              keywords="About Thamizhoviyaa, natural wellness, traditional herbal remedies, chemical-free lifestyle, organic farming, NAMAKKAL herbal products" 
+            />
             {/* Header */}
             <section className="bg-primary-600 text-white section-padding">
                 <div className="container-custom">

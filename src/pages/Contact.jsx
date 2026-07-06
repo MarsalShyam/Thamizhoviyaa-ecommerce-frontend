@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from 'react-icons/fi'
 import emailjs from '@emailjs/browser';
-
+import { toast } from 'react-toastify';
+import SEO from '../components/SEO';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ const Contact = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      alert("Message sent successfully! We will contact you soon.");
+      toast.success("Message sent successfully! We will contact you soon.");
 
       setFormData({
         name: "",
@@ -48,7 +49,7 @@ const Contact = () => {
       });
     } catch (error) {
       console.error("EmailJS Error:", error);
-      alert("Failed to send message. Please try again.");
+      toast.error("Failed to send message. Please try again.");
     }
   };
 
@@ -78,13 +79,18 @@ const Contact = () => {
 
   return (
     <div>
+      <SEO
+        title="Contact Us"
+        description="Get in touch with Thamizhoviyaa Herbal Products. Contact us for bulk queries, orders, feedback, or inquiries about our organic wellness products."
+        keywords="contact Thamizhoviyaa, customer support, bulk herbal orders, organic products Namakkal, phone number, email address"
+      />
       {/* Header */}
       <section className="bg-primary-600 text-white section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
@@ -103,7 +109,7 @@ const Contact = () => {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
 
@@ -113,7 +119,7 @@ const Contact = () => {
                     key={info.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
                     className="flex items-start space-x-4"
                   >
                     <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -133,7 +139,7 @@ const Contact = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
                 className="bg-green-50 border border-green-200 rounded-xl p-6"
               >
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -270,7 +276,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Location</h2>
@@ -280,7 +286,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             className="bg-white rounded-xl shadow-lg overflow-hidden"
           >
             <div className="relative h-96">

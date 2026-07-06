@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import ProductGrid from '../components/ProductGrid'
 import axios from 'axios'
 import { ProductGridSkeleton } from '../components/SkeletonLoader'
+import SEO from '../components/SEO'
 
 // Hardcoded categories list (can be dynamic via an API later)
 const CATEGORIES = [
@@ -62,6 +63,11 @@ const Products = () => {
 
   return (
     <div>
+      <SEO 
+        title="Shop Herbal Products" 
+        description="Browse our collection of organic hair care, skin care, bath & body, and wellness products. 100% natural, hand-crafted solutions for your daily health." 
+        keywords="buy herbal products online, herbal hair care, organic skin care products, natural bath powder, wellness products India, cotton dhoti" 
+      />
       {/* Header */}
       <section className="bg-primary-600 text-white section-padding">
         <div className="container-custom">

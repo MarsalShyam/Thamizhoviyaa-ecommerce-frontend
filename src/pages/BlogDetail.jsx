@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FiCalendar, FiUser, FiArrowLeft, FiTag } from 'react-icons/fi';
 import axios from 'axios';
 import LoadingSpinner from '../components/LoadingSpinner';
+import SEO from '../components/SEO';
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -31,6 +32,7 @@ const BlogDetail = () => {
   if (!blog) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
+        <SEO title="Article Not Found" description="The blog post you are looking for does not exist." keywords="not found, 404, blog" />
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Article Not Found</h2>
         <p className="text-gray-500 mb-4">The blog post you are looking for does not exist or has been removed.</p>
         <Link to="/blog" className="btn-primary inline-flex items-center gap-2">
@@ -47,6 +49,11 @@ const BlogDetail = () => {
       transition={{ duration: 0.6 }}
       className="bg-gray-50 min-h-screen py-10"
     >
+      <SEO 
+        title={blog.title} 
+        description={`Read about ${blog.title} on Thamizhoviyaa.`} 
+        keywords={`${blog.title}, herbal remedy, health tips, traditional tamil herbal recipes`} 
+      />
       <div className="container-custom max-w-4xl">
         <Link to="/blog" className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-800 font-semibold mb-6 transition-colors">
           <FiArrowLeft /> Back to Articles
