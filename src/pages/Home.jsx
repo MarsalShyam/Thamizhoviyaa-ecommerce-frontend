@@ -55,7 +55,7 @@ const Home = () => {
     ]
 
     return (
-        <div>
+        <div className="overflow-x-hidden w-full max-w-[100vw]">
             <SEO
                 title="Home"
                 description="Experience the purity of traditional Tamil herbal wisdom with Thamizhoviyaa. Shop 100% natural, chemical-free herbal hair oil, skin care, bath powder, and home goodies."
@@ -64,7 +64,7 @@ const Home = () => {
             <Hero />
 
             {/* Features Section */}
-            <section className="section-padding bg-white">
+            <section className="section-padding bg-white overflow-hidden">
                 <div className="container-custom">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -102,7 +102,7 @@ const Home = () => {
 
             {/* Featured Products (MODIFIED) */}
             {loading ? (
-                <section className="section-padding bg-gray-100">
+                <section className="section-padding bg-gray-100 overflow-hidden">
                     <div className="container-custom">
                         <ProductGridSkeleton count={3} />
                     </div>
@@ -116,11 +116,11 @@ const Home = () => {
             )}
 
             {/* About Preview */}
-            <section className="section-padding bg-white">
+            <section className="section-padding bg-white overflow-hidden">
                 <div className="container-custom">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <motion.div
-                            initial={{ opacity: 0, x: -50 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
                         >
@@ -143,7 +143,7 @@ const Home = () => {
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0, x: 50 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
                             className="grid grid-cols-2 gap-4"
@@ -211,8 +211,14 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Marketplaces />
-            <Testimonials />
+            <div className="overflow-hidden">
+                <Marketplaces />
+            </div>
+            <div className="overflow-hidden">
+                <Testimonials />
+            </div>
+
+
 
         </div>
     )

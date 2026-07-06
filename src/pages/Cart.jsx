@@ -11,10 +11,10 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 section-padding">
-        <SEO 
-          title="Shopping Cart" 
-          description="Review the products in your shopping cart before proceeding to checkout. Secure shopping for 100% natural herbal goodies." 
-          keywords="shopping cart, checkout, herbal products cart" 
+        <SEO
+          title="Shopping Cart"
+          description="Review the products in your shopping cart before proceeding to checkout. Secure shopping for 100% natural herbal goodies."
+          keywords="shopping cart, checkout, herbal products cart"
         />
         <div className="container-custom">
           <div className="text-center py-16">
@@ -32,10 +32,10 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 section-padding">
-      <SEO 
-        title="Shopping Cart" 
-        description="Review the products in your shopping cart before proceeding to checkout. Secure shopping for 100% natural herbal goodies." 
-        keywords="shopping cart, checkout, herbal products cart" 
+      <SEO
+        title="Shopping Cart"
+        description="Review the products in your shopping cart before proceeding to checkout. Secure shopping for 100% natural herbal goodies."
+        keywords="shopping cart, checkout, herbal products cart"
       />
       <div className="container-custom">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
@@ -47,40 +47,43 @@ const Cart = () => {
                 key={item._id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-lg shadow-sm p-6 mb-4"
+                className="bg-white rounded-lg shadow-sm p-2 md:p-4 lg:p-6 mb-4"
               >
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-col md:flex-row items-center space-x-1 md:space-x-3 md:space-x-4">
                   <img
                     src={item.image}
                     alt={item.name}
                     className="w-20 h-20 object-contain rounded-lg"
                   />
+
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900">{item.name}</h3>
                     <p className="text-gray-600 text-sm">Size: {item.size}</p>
                     <p className="text-primary-600 font-semibold">₹{item.price}</p>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className='flex'>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => updateQuantity(item._id, Math.max(1, item.quantity - 1))}
+                        className="p-1 rounded-full hover:bg-gray-100"
+                      >
+                        <FiMinus className="w-4 h-4" />
+                      </button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                        className="p-1 rounded-full hover:bg-gray-100"
+                      >
+                        <FiPlus className="w-4 h-4" />
+                      </button>
+                    </div>
                     <button
-                      onClick={() => updateQuantity(item._id, Math.max(1, item.quantity - 1))}
-                      className="p-1 rounded-full hover:bg-gray-100"
+                      onClick={() => removeFromCart(item._id)}
+                      className="p-2 text-red-600 hover:bg-red-50 rounded-full"
                     >
-                      <FiMinus className="w-4 h-4" />
-                    </button>
-                    <span className="w-8 text-center">{item.quantity}</span>
-                    <button
-                      onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                      className="p-1 rounded-full hover:bg-gray-100"
-                    >
-                      <FiPlus className="w-4 h-4" />
+                      <FiTrash2 className="w-5 h-5" />
                     </button>
                   </div>
-                  <button
-                    onClick={() => removeFromCart(item._id)}
-                    className="p-2 text-red-600 hover:bg-red-50 rounded-full"
-                  >
-                    <FiTrash2 className="w-5 h-5" />
-                  </button>
                 </div>
               </motion.div>
             ))}

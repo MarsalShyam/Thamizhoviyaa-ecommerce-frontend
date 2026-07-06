@@ -152,10 +152,10 @@ const About = () => {
 
     return (
         <div>
-            <SEO 
-              title="About Us" 
-              description="Learn about Thamizhoviyaa's journey, our commitment to natural wellness, and how we bring traditional Tamil herbal secrets to modern lifestyle." 
-              keywords="About Thamizhoviyaa, natural wellness, traditional herbal remedies, chemical-free lifestyle, organic farming, NAMAKKAL herbal products" 
+            <SEO
+                title="About Us"
+                description="Learn about Thamizhoviyaa's journey, our commitment to natural wellness, and how we bring traditional Tamil herbal secrets to modern lifestyle."
+                keywords="About Thamizhoviyaa, natural wellness, traditional herbal remedies, chemical-free lifestyle, organic farming, NAMAKKAL herbal products"
             />
             {/* Header */}
             <section className="bg-primary-600 text-white section-padding">
@@ -677,7 +677,7 @@ const About = () => {
                             transition={{ duration: 0.4 }}
                             className="bg-white/10 backdrop-blur-sm rounded-2xl p-8"
                         >
-                            <h3 className="text-2xl font-bold mb-4">Why Choose Us?</h3>
+                            <h3 className="text-2xl font-bold mb-4">We Provide?</h3>
                             <ul className="space-y-4">
                                 <li className="flex items-center space-x-3">
                                     <div className="w-6 h-6 bg-accent-400 rounded-full flex items-center justify-center">

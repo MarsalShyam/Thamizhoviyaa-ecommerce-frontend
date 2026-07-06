@@ -46,14 +46,13 @@ import FloatingContact from './components/FloatingContact'
 
 // === Layout ===
 const MainLayout = () => (
-  <>
+  <div className="flex flex-col min-h-screen">
     <Header />
-    {/* <FloatingContact /> */}
-    <main className="flex-grow">
+    <main className="flex-grow overflow-x-hidden w-full">
       <Outlet />
     </main>
     <Footer />
-  </>
+  </div>
 )
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;

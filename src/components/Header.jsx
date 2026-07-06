@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiShoppingCart, FiUser, FiHeart } from 'react-icons/fi'
@@ -11,6 +11,7 @@ const Header = () => {
     const location = useLocation()
     const { cartCount, wishlist } = useCart()
     const { isAuthenticated, logout, user, isAdmin } = useAuth()
+    const [scrolled, setScrolled] = useState(false)
 
     const navigation = [
         { name: 'Home', href: '/' },
@@ -20,11 +21,22 @@ const Header = () => {
         { name: 'Contact', href: '/contact' },
     ]
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
     const isActive = (path) => location.pathname === path
     const profileLink = isAuthenticated ? '/profile' : '/login'
     return (
         <motion.header
-            className="bg-white shadow-sm sticky top-0 z-50"
+            className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
+                ? 'bg-white/95 backdrop-blur-md shadow-md'
+                : 'bg-white shadow-sm'
+                }`}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
