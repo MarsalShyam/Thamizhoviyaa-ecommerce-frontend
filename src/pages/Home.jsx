@@ -56,10 +56,10 @@ const Home = () => {
 
     return (
         <div>
-            <SEO 
-              title="Home" 
-              description="Experience the purity of traditional Tamil herbal wisdom with Thamizhoviyaa. Shop 100% natural, chemical-free herbal hair oil, skin care, bath powder, and home goodies." 
-              keywords="Thamizhoviyaa, herbal products, natural skincare, organic haircare, traditional tamil herbs, herbal bath powder, home goodies, chemical-free wellness" 
+            <SEO
+                title="Home"
+                description="Experience the purity of traditional Tamil herbal wisdom with Thamizhoviyaa. Shop 100% natural, chemical-free herbal hair oil, skin care, bath powder, and home goodies."
+                keywords="Thamizhoviyaa, herbal products, natural skincare, organic haircare, traditional tamil herbs, herbal bath powder, home goodies, chemical-free wellness"
             />
             <Hero />
 
