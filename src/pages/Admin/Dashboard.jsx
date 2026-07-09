@@ -159,7 +159,7 @@ const Dashboard = () => {
                 <FiActivity className="text-primary-600" />
                 <span>Revenue Analytics (Last 7 Days)</span>
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">Daily sales revenue trends</p>
+              <p className="text-xs text-gray-500 mt-0.5">Daily sales revenue</p>
             </div>
             <div className="text-right">
               <span className="text-xs text-gray-400 block">Total Revenue</span>
