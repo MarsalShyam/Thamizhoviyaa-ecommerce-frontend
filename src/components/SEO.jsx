@@ -4,14 +4,14 @@ const SEO = ({ title, description, keywords, schema }) => {
   useEffect(() => {
     // 1. Title
     if (title) {
-      document.title = `${title} | Thamizhoviyaa Herbal Products`;
+      document.title = `${title} | Thamizhoviyaa Home Goodies`;
       let ogTitle = document.querySelector('meta[property="og:title"]');
       if (!ogTitle) {
         ogTitle = document.createElement('meta');
         ogTitle.setAttribute('property', 'og:title');
         document.head.appendChild(ogTitle);
       }
-      ogTitle.setAttribute('content', `${title} | Thamizhoviyaa Herbal Products`);
+      ogTitle.setAttribute('content', `${title} | Thamizhoviyaa Home Goodies`);
     }
 
     // 2. Description

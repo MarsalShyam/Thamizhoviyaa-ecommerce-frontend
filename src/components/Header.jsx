@@ -166,7 +166,7 @@ const Header = () => {
                             <SignInButton mode="modal">
                                 <button className="flex items-center space-x-2 px-4 py-2 bg-primary-600 text-white rounded-full text-sm font-medium hover:bg-primary-700 transition-colors duration-200 shadow-sm hover:shadow-md">
                                     <FiUser className="w-4 h-4" />
-                                    <span>SignIn/SignUp</span>
+                                    <span>SignIn</span>
                                 </button>
                             </SignInButton>
                         )}
