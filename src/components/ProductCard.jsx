@@ -111,9 +111,9 @@ const ProductCard = ({ product }) => {
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <h3 className="font-semibold text-lg text-gray-900 line-clamp-2">{product.name}</h3>
-          <span className="bg-primary-100 text-primary-700 text-xs px-2 py-1 rounded-full">
+          {/* <span className="bg-primary-100 text-primary-700 text-xs px-2 py-1 rounded-full">
             {product.category}
-          </span>
+          </span> */}
         </div>
 
         <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
