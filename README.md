@@ -19,17 +19,33 @@ A premium, highly interactive, and responsive web application frontend built usi
 
 ---
 
-## 📸 Interface Preview (Screenshots)
+## 📸 Screenshots
 
-*Note: Replace placeholders in `./public/screenshots/` with actual screenshot images before submitting.*
+<div align="center">
 
-| 🖥 Home Page Banner & Hero | 🏷 Product Collection Grid & Filters |
+### 🌐 Customer Experience
+
+| 🏠 Home Page & Hero | 🛍️ Product Collection Grid |
 |:---:|:---:|
-| ![Home Page](https://images.unsplash.com/photo-1472851294608-062f824d296e?q=80&w=800&auto=format&fit=crop) | ![Product Grid](https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop) |
+| ![Home Page](./public/images/proj-screenshot/heropage.png) | ![Product Grid](./public/images/proj-screenshot/product-grid.png) |
 
-| 🛒 Interactive Drawer Cart | 📈 Admin Sales Dashboard |
+| 📦 Product Detail Page | 📋 Order Tracking |
 |:---:|:---:|
-| ![Cart Drawer](https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?q=80&w=800&auto=format&fit=crop) | ![Admin Dashboard](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop) |
+| ![Product Page](./public/images/proj-screenshot/product-page.png) | ![Order Page](./public/images/proj-screenshot/orderPage.png) |
+
+---
+
+### ⚙️ Admin Panel
+
+| 📊 Admin Dashboard | 🚚 Order Management |
+|:---:|:---:|
+| ![Admin Dashboard](./public/images/proj-screenshot/admin-dashboard.png) | ![Order Management](./public/images/proj-screenshot/admin-order-manage.png) |
+
+| ➕ Add New Product | 📝 Create Blog Post |
+|:---:|:---:|
+| ![Add Product](./public/images/proj-screenshot/admin-project-create.png) | ![Add Blog](./public/images/proj-screenshot/admin-blog.png) |
+
+</div>
 
 ---
 
